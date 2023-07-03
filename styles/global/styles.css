@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'instrumental sans';
+    src: url('../../public/fonts/InstrumentSans-VariableFont_wdth\,wght.ttf');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+}
+
+:root{
+    --font: 'instrumental sans';
+}
+
+body{
+    background-color: #FAFAFA;
+    min-height: 100vh;
+    border: 0.1px solid transparent;                /* to prevent margin collapse*/
+}
