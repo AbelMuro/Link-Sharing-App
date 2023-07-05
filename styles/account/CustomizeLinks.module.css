@@ -1,0 +1,64 @@
+.container{
+    width: 100%;
+    height: 834px;
+    border-radius: 12px;
+    background-color: white;  
+}
+
+.container:nth-of-type(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.phone_container{
+    position: relative;
+}
+
+.phone_mockup{
+    width: 307px;
+    height: auto;
+    object-fit: contain;
+}
+
+.container:nth-of-type(2){
+    padding: 40px;
+}
+
+.title{
+    color: #333;
+    font-family: var(--font);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    margin-bottom: 8px;
+}
+
+.desc{
+    color: #737373;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 150%;
+    margin-bottom: 40px;
+}
+
+.addLinkButton{
+    width: 100%;
+    height: 46px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #633CFF;
+    cursor: pointer;
+    color: #633CFF;
+    font-family: var(--font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.addLinkButton:hover{
+    background-color: #EFEBFF;
+}

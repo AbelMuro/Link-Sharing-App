@@ -5,10 +5,13 @@ export const Context = createContext();
 
 export default function MyApp({Component, pageProps}) {
     const [openLoginMessage, setOpenLoginMessage] = useState(false);
+    const [link, setLink] = useState('links');
 
     const value = {
         openLoginMessage,
-        setOpenLoginMessage
+        setOpenLoginMessage,
+        link,
+        setLink
     }
 
     return(

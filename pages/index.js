@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import {useState, memo} from 'react';
 import Image from 'next/image';
 import styles from '../styles/authorization/Authorization.module.css';
 import LoginForm from '../components/authorization/LoginForm';
 import CreateAccountForm from '../components/authorization/CreateAccountForm';
 import LoginMessageDialog from '../components/authorization/LoginMessageDialog';
 
-export default function Authorization() {
+const Authorization = () => {
     const [loginOrCreateAccount, setLoginOrCreateAccount] = useState(true);
 
     const changePage = () => {
@@ -55,6 +55,7 @@ export default function Authorization() {
             </main>    
             <LoginMessageDialog/>      
         </>
-
     )
 }
+
+export default memo(Authorization)

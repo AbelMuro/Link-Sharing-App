@@ -1,15 +1,14 @@
-import {useState, useEffect} from 'react';
+import {useContext, useEffect} from 'react';
+import {Context} from '../../pages/_app';
 import Image from 'next/image';
 import styles from '../../styles/account/NavBar.module.css';
 
-
-//this is where i left off, i will need to create a reducer for the link state
 export default function NavBar() {
-    const [link, setLink] = useState('links');
+    const {link, setLink} = useContext(Context);
 
     const handleLink = (e) => {
         const currentLink = e.target.getAttribute('data-link');
-        setLink(currentLink)
+        setLink(currentLink);
     }
 
     useEffect(() => {
