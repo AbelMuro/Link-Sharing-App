@@ -5,22 +5,12 @@
     margin-bottom: 24px;
 }
 
-.requirement{
-    color: #737373;
-    font-size: 0.75rem;
-    font-family: var(--font);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-}
-
 .submitButton{
+    flex-shrink: 0;
+    border-radius: 8px;
     height: 46px;
     background-color: #633CFF;
-    color: #FFFFFF;
-    border-radius: 8px;
-    padding: 11px 27px;
-    gap: 8px;
+    color:  #FFF;
     font-size: 1rem;
     font-family: var(--font);
     font-style: normal;
@@ -31,5 +21,15 @@
 
 .submitButton:hover{
     background-color: #BEADFF;
-    box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25)
+    box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+}
+
+.errorMessage{
+    display: none;
+    color: #FF3939;
+    font-size: 1.02rem;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
 }

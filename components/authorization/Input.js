@@ -1,8 +1,8 @@
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react'
 import Image from 'next/image';
-import styles from '../../styles/account/Input.module.css';
+import styles from '../../styles/authorization/Input.module.css';
 
-export default function Input({label, type, icon, error, placeholder}) {
+const Input = forwardRef(({label, type, icon, error, placeholder}, ref) => {
     const [text, setText] = useState('');
     const errorMessageRef = useRef();
     const emptyMessageRef = useRef();
@@ -21,12 +21,14 @@ export default function Input({label, type, icon, error, placeholder}) {
         if(isEmpty){
             inputRef.current.style.border = '1px solid #FF3939';
             inputRef.current.style.boxShadow = 'none'
+            inputRef.current.style.paddingRight = '100px';
             emptyMessageRef.current.style.display = 'block';
             labelRef.current.style.color = '#FF3939'
         }
         else if(isTypeInvalid){
             inputRef.current.style.border = '1px solid #FF3939';
             inputRef.current.style.boxShadow = 'none'
+            inputRef.current.style.paddingRight = '100px';
             errorMessageRef.current.style.display = 'block';
             labelRef.current.style.color = '#FF3939'
         }
@@ -35,24 +37,26 @@ export default function Input({label, type, icon, error, placeholder}) {
     const handleInvalid = (e) => {
         e.target.setCustomValidity(' ');
         const isEmpty = e.target.validity.valueMissing;
-        
-        if(isEmpty){
-            inputRef.current.style.border = '1px solid #FF3939';
-            inputRef.current.style.boxShadow = 'none'
+        inputRef.current.style.border = '1px solid #FF3939';        
+        inputRef.current.style.boxShadow = 'none';
+        inputRef.current.style.paddingRight = '100px';   
+        labelRef.current.style.color = '#FF3939';             
+        if(isEmpty)
             emptyMessageRef.current.style.display = 'block';
-            labelRef.current.style.color = '#FF3939'
-        }
-        else {
-            inputRef.current.style.border = '1px solid #FF3939';
-            inputRef.current.style.boxShadow = 'none'
+        else 
             errorMessageRef.current.style.display = 'block';
-            labelRef.current.style.color = '#FF3939'
-        }
     }
+
+    useImperativeHandle(ref, () => ({
+        get state() {
+            return text;
+        }
+    }))
 
     useEffect(() => {
         inputRef.current.style.border = '';
         inputRef.current.style.boxShadow = ''
+        inputRef.current.style.paddingRight = '';
         emptyMessageRef.current.style.display = '';
         errorMessageRef.current.style.display = '';
         labelRef.current.style.color = '';
@@ -87,4 +91,6 @@ export default function Input({label, type, icon, error, placeholder}) {
             </div>
         </fieldset>
     )
-}
+})
+
+export default Input

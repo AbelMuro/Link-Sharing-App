@@ -8,8 +8,8 @@
     margin: 0px;
     padding: 0px;
     border: none;
+    -webkit-transition: all 0.2s linear;    
     transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
 }
 
 :root{
@@ -20,4 +20,10 @@ body{
     background-color: #FAFAFA;
     min-height: 100vh;
     border: 0.1px solid transparent;                /* to prevent margin collapse*/
+}
+
+@media(max-width: 540px) {
+    body{
+        background-color: White;
+    }
 }

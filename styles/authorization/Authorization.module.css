@@ -1,0 +1,113 @@
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 51px
+}
+
+.logo{
+    width: 182.5px;
+    height: auto;
+    object-fit: contain;
+}
+
+.login{
+    width: 476px;
+    min-height: 482px;
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 40px;
+}
+
+.login_title, .createAccount_title{
+    color: #333;
+    font-size: 2rem;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+}
+
+.login_desc, .createAccount_desc{
+    color: #737373;
+    font-size: 1rem;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin-bottom: 32px;
+}
+
+.messageButton , .message {
+    text-align: center;
+    font-size: 1rem;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;   
+}
+
+.message{
+    color: #737373;
+}
+
+.messageButton{
+    background-color: transparent;
+    color: #633CFF;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.messageButton:hover{
+    text-decoration: underline;
+}
+
+
+.createAccount{
+    width: 476px;
+    min-height: 618px;
+    border-radius: 12px;
+    padding: 40px;
+    background-color: white;
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+@media(max-width: 540px){
+    .logo{
+        width: 135px;
+    }
+
+    .container{
+        align-items: flex-start;
+        gap: 64px;
+        width: 100%;
+        padding: 0px 32px;
+        top: 32px;
+        left: 0px;
+        transform: none;
+    }
+
+    .login, .createAccount{
+        width: 100%;
+        padding: 0px;
+    }
+
+    .login_title, .createAccount_title{
+        font-size: 1.5rem;
+    }
+    
+    .message{
+        width: 230px;
+        align-self: center;
+    }
+}
