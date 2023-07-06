@@ -1,11 +1,28 @@
+import {useRef, useState} from 'react';
 import PlaformSelectBox from './PlatformSelectBox';
 import LinkInput from './LinkInput';
 import Image from 'next/image';
 import styles from '../../styles/account/CustomizeLinks.module.css';
 
-
-//i will need to define my on submit event handler
 export default function CustomizedLinks(){
+    const [allLinks, setAllLinks] = useState([])
+    const platform = useRef();
+    const link = useRef();
+
+    const addLink = () => {
+        const newLink = {
+            title: `= Link #${allLinks.length + 1}`,
+            platform: 'Github',
+            link: '',
+        }
+
+        setAllLinks([...allLinks, newLink]);
+    }
+
+    const handleSubmit = (e) => {
+        
+    }
+
     return(
         <>
             <section className={styles.container}>
@@ -23,25 +40,31 @@ export default function CustomizedLinks(){
                 <p className={styles.desc}>
                     Add/edit/remove links below and then share all your profiles with the world
                 </p>
-                <button className={styles.addLinkButton}> 
+                <button className={styles.addLinkButton} onClick={addLink}> 
                     + Add new link
                 </button>
-                <form>
-                    <section className={styles.link_container}>
-                        <h1 className={styles.link_title}>
-                            = Link #1
-                        </h1>
-                        <button className={styles.link_remove}>
-                            Remove
-                        </button>
-                        <PlaformSelectBox/>
-                        <LinkInput/>                       
-                    </section>
-                <div className={styles.submit_container}>
-                    <input type='submit' value='Save' className={styles.submit}/> 
-                </div>
-                </form>
+                <form onSubmit={handleSubmit}>
+                    {allLinks.map((link) => {
+                        return(
+                            <section className={styles.link_container}>
+                                <h1 className={styles.link_title}>
+                                    {link.title}
+                                </h1>
+                                <button className={styles.link_remove}>
+                                    Remove
+                                </button>
+                                <PlaformSelectBox initialPlatform={link.platform} ref={platform} />
+                                <LinkInput initialLink={link.link} ref={link}/>                       
+                            </section>                            
+                        )
+                    })}
 
+
+
+                    <div className={styles.submit_container}>
+                        <input type='submit' value='Save' className={styles.submit}/> 
+                    </div>
+                </form>
             </section>
         </>
     )

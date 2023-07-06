@@ -1,8 +1,8 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
 import styles from '../../styles/account/PlatformSelectBox.module.css';
 
-export default function PlaformSelectBox() {
-    const [platform, setPlatform] = useState('Github');
+const PlaformSelectBox = forwardRef(({initialPlatform}, ref) =>  {
+    const [platform, setPlatform] = useState(initialPlatform ? initialPlatform : 'Github');
     const [platformIcon, setPlatformIcon] = useState('/icons/icon-github.svg');
     const [open, setOpen] = useState(false);
     const arrowIcon = useRef();
@@ -19,6 +19,12 @@ export default function PlaformSelectBox() {
     const handlePopup = () => {
         setOpen(!open);
     }
+
+    useImperativeHandle(ref, () => ({
+        get state(){
+            return platform;
+        }
+    }))
 
     useEffect(() => {
         if(open){
@@ -72,4 +78,6 @@ export default function PlaformSelectBox() {
 
         </fieldset>
     )
-}
+})
+
+export default PlaformSelectBox;

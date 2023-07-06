@@ -1,9 +1,9 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
 import styles from '../../styles/account/LinkInput.module.css';
 
 
-export default function LinkInput() {
-    const [url, setUrl] = useState('');
+const LinkInput = forwardRef(({initialLink}, ref) => {
+    const [url, setUrl] = useState(initialLink);
     const inputRef = useRef();
     const emptyMessageRef = useRef();
     const invalidUrlMessageRef = useRef();
@@ -43,6 +43,12 @@ export default function LinkInput() {
         invalidUrlMessageRef.current.style.display = 'block';
     }
 
+    useImperativeHandle(ref, () => ({
+        get state(){
+            return url;
+        }
+    }))
+
     useEffect(() => {
         emptyMessageRef.current.style.display = '';
         inputRef.current.style.border = '';
@@ -75,4 +81,6 @@ export default function LinkInput() {
             </div>
         </fieldset>
     )
-}
+})
+
+export default LinkInput;
