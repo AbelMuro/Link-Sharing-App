@@ -57,8 +57,44 @@
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
+    margin-bottom: 24px;
 }
 
 .addLinkButton:hover{
     background-color: #EFEBFF;
+}
+
+.link_container{
+    padding: 20px;
+    background-color: #FAFAFA;
+    border-radius: 12px;
+    position: relative;
+}
+
+.link_title{
+    color: #737373;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    margin-bottom: 12px;
+}
+
+.link_remove{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: #737373;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+.link_remove:hover{
+    color: #633CFF;
 }

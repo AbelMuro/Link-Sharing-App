@@ -1,3 +1,5 @@
+import PlaformSelectBox from './PlatformSelectBox';
+import LinkInput from './LinkInput';
 import Image from 'next/image';
 import styles from '../../styles/account/CustomizeLinks.module.css';
 
@@ -22,6 +24,16 @@ export default function CustomizedLinks(){
                 <button className={styles.addLinkButton}> 
                     + Add new link
                 </button>
+                <form className={styles.link_container}>
+                    <h1 className={styles.link_title}>
+                        = Link #1
+                    </h1>
+                    <button className={styles.link_remove}>
+                        Remove
+                    </button>
+                    <PlaformSelectBox/>
+                    <LinkInput/>
+                </form>
             </section>
         </>
     )
