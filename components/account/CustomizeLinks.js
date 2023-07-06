@@ -3,6 +3,8 @@ import LinkInput from './LinkInput';
 import Image from 'next/image';
 import styles from '../../styles/account/CustomizeLinks.module.css';
 
+
+//i will need to define my on submit event handler
 export default function CustomizedLinks(){
     return(
         <>
@@ -24,16 +26,22 @@ export default function CustomizedLinks(){
                 <button className={styles.addLinkButton}> 
                     + Add new link
                 </button>
-                <form className={styles.link_container}>
-                    <h1 className={styles.link_title}>
-                        = Link #1
-                    </h1>
-                    <button className={styles.link_remove}>
-                        Remove
-                    </button>
-                    <PlaformSelectBox/>
-                    <LinkInput/>
+                <form>
+                    <section className={styles.link_container}>
+                        <h1 className={styles.link_title}>
+                            = Link #1
+                        </h1>
+                        <button className={styles.link_remove}>
+                            Remove
+                        </button>
+                        <PlaformSelectBox/>
+                        <LinkInput/>                       
+                    </section>
+                <div className={styles.submit_container}>
+                    <input type='submit' value='Save' className={styles.submit}/> 
+                </div>
                 </form>
+
             </section>
         </>
     )
