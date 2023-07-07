@@ -15,7 +15,7 @@
 
 .input_container{
     position: relative;
-    z-index: var(--close);
+    z-index: var(--far);
 }
 
 

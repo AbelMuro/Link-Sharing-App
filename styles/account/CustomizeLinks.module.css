@@ -1,12 +1,12 @@
 .container{
     width: 100%;
-    height: 834px;
     border-radius: 12px;
     background-color: white;  
     position: relative;
 }
 
 .container:nth-of-type(1){
+    height: 834px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,8 +23,8 @@
 }
 
 .container:nth-of-type(2){
-    padding: 40px 40px 94px 40px;
-    overflow: hidden;
+    min-height: 834px;
+    padding: 40px 0px 0px 0px;
 }
 
 .title{
@@ -35,6 +35,7 @@
     font-weight: 700;
     line-height: 150%;
     margin-bottom: 8px;
+    padding: 0px 40px;
 }
 
 .desc{
@@ -44,10 +45,11 @@
     font-weight: 400;
     line-height: 150%;
     margin-bottom: 40px;
+    padding: 0px 40px;
 }
 
 .addLinkButton{
-    width: 100%;
+    width: 89%;
     height: 46px;
     border-radius: 8px;
     background-color: transparent;
@@ -59,7 +61,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
-    margin-bottom: 24px;
+    margin: 0px 40px 24px 40px;
 }
 
 .addLinkButton:hover{
@@ -70,8 +72,9 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    height: 500px;
-    overflow-y: auto;
+    min-height: 500px;
+    padding: 0px 40px 24px 40px;
+
 }
 
 
@@ -120,12 +123,6 @@
     align-items: center;
     justify-content: flex-end;
     padding: 0px 40px;
-    position: absolute;
-    z-index: var(--closest);
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    margin: auto;
 }
 
 .submit{

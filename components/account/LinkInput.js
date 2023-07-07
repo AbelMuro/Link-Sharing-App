@@ -1,8 +1,8 @@
-import {useState, useRef, useEffect, useImperativeHandle} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import styles from '../../styles/account/LinkInput.module.css';
 
 
-const LinkInput = ({initialState, setAllLinks, id}) => {
+const LinkInput = ({initialState}) => {
     const [url, setUrl] = useState(initialState);
     const inputRef = useRef();
     const emptyMessageRef = useRef();
@@ -39,14 +39,7 @@ const LinkInput = ({initialState, setAllLinks, id}) => {
             inputRef.current.style.color = '#FF3939'
         }
         else{                                               //we update the link in the parent's state
-            setAllLinks((links) => {
-                return links.map((link) => {
-                    if(link.id === id)
-                        return {...link, url};
-                    else
-                        return link;
-                })
-            })            
+         
         }
 
     }
@@ -77,6 +70,7 @@ const LinkInput = ({initialState, setAllLinks, id}) => {
                 <img src={'/icons/icon-link.svg'} className={styles.link_icon}/>
                 <input type='url' 
                     className={styles.input}
+                    name={'url'}
                     value={url}
                     onChange={handleChange}
                     onBlur={handleBlur}

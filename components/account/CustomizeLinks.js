@@ -1,71 +1,77 @@
-import {useState, useMemo, useEffect} from 'react';
+import {useMemo, useContext} from 'react';
+import {Context} from '../../pages/_app';
 import {v4 as uuid} from 'uuid'
 import PlaformSelectBox from './PlatformSelectBox';
 import LinkInput from './LinkInput';
 import Image from 'next/image';
 import styles from '../../styles/account/CustomizeLinks.module.css';
-import {db, auth} from '../../firebase/Configuration';
-import {collection, addDoc} from 'firebase/firestore';
-import {useCollectionData, useCollection} from 'react-firebase-hooks/firestore';        
+import {db} from '../../firebase/Configuration';
+import {collection, doc, setDoc, deleteDoc, updateDoc} from 'firebase/firestore';    
+import {useCollectionData} from 'react-firebase-hooks/firestore';      
 
 
-//next thing i have to do is get the users collection in the firestore and (if they have anything) put the documents in a state array
-//i might need to put the auth current user ID in the context 
 export default function CustomizedLinks(){
-    const [allLinks, setAllLinks] = useState([]);
+    const {uid} = useContext(Context);
+    const collectionRef = collection(db, uid);
+    const [links, loading, error] = useCollectionData(collectionRef);
 
-    const addLink = () => {
+    const addLink = async () => {
         const newLink = {
             id: uuid(),
             platform: 'Github',
             link: '',
         }
-        setAllLinks([...allLinks, newLink]);
+        const newDoc = doc(db, uid, newLink.id);
+        await setDoc(newDoc, newLink);
     }
 
-    const removeLink = (e) => {
+    const removeLink = async (e) => {
         const linkID = e.target.id;
-        setAllLinks((links) => {
-            return links.filter((link) => {
-                if(link.id === linkID)
-                    return false;
-                else    
-                    return true;
-            })
-        })
+        const docRef = doc(db, `${uid}/${linkID}`);
+        await deleteDoc(docRef)
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            const userCollection = collection(db, auth.currentUser.uid);                   
-            await addDoc(userCollection, {'users links': allLinks});                             
-        }                                                                   
-        catch(error){
-            console.log("error");
-        }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();       
+        const updatedLinks = e.target.elements.linkContainer;
+        Array.from(updatedLinks).map((link) => {
+            const linkId = link.getAttribute('id')
+            const newPlatform = link.querySelector('[name=platform]').getAttribute('data-platform');
+            const newLink = link.querySelector('[name=url]').value;
+
+            async function updateDocs(){
+                const linkDoc = doc(db, `${uid}/${linkId}`);
+                await updateDoc(linkDoc, {
+                    id: linkId,
+                    platform: newPlatform,
+                    link: newLink,
+                })
+            }
+            updateDocs();
+        })
+
     }
 
     const showLinks = useMemo(() => {
-        return allLinks.map((link, i) => {
+        if(loading) return;
+
+        return links.map((link, i) => {
             return(
-                <section className={styles.link_container} key={link.id}>
+                <fieldset className={styles.link_container} key={link.id} name='linkContainer' id={link.id}>
                     <h1 className={styles.link_title}>
                         {`= Link #${i + 1}`}
                     </h1>
                     <button type='button' className={styles.link_remove} onClick={removeLink} id={link.id}>
                         Remove
                     </button>
-                    <PlaformSelectBox initialState={link.platform} setAllLinks={setAllLinks} id={link.id}/>
-                    <LinkInput initialState={link.link} setAllLinks={setAllLinks} id={link.id}/>                       
-                </section>                            
+                    <PlaformSelectBox initialState={link.platform} zIndex={1000-i}/>
+                    <LinkInput initialState={link.link} />                       
+                </fieldset>                            
             )
         })
-    }, [allLinks])
+    }, [links, loading])
 
-    useEffect(() => {
-        console.log(allLinks);
-    }, [allLinks])
 
     return(
         <>
@@ -89,10 +95,10 @@ export default function CustomizedLinks(){
                 </button>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     {showLinks}
-                    <div className={styles.submit_container}>
-                        <input type='submit' value='Save' className={styles.submit}/> 
-                    </div>
-                </form>
+                </form>                    
+                <div className={styles.submit_container}>
+                    <input type='submit' value='Save' className={styles.submit}/> 
+                </div>
             </section>
         </>
     )

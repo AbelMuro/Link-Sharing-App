@@ -1,7 +1,7 @@
 import {useState, useRef, useEffect} from 'react';
 import styles from '../../styles/account/PlatformSelectBox.module.css';
 
-const PlaformSelectBox = ({initialState, setAllLinks, id}) => {
+const PlaformSelectBox = ({initialState, zIndex}) => {
     const [platform, setPlatform] = useState(initialState ? initialState : 'Github');
     const [platformIcon, setPlatformIcon] = useState('/icons/icon-github.svg');
     const [open, setOpen] = useState(false);
@@ -18,17 +18,6 @@ const PlaformSelectBox = ({initialState, setAllLinks, id}) => {
     const handlePopup = () => {
         setOpen(!open);
     }
-
-    useEffect(() => {
-        setAllLinks((links) => {
-            return links.map((link) => {
-                if(link.id === id)
-                    return {...link, platform};
-                else
-                    return link;
-            })
-        })
-    }, [platform])
 
     useEffect(() => {
         if(open){
@@ -51,11 +40,11 @@ const PlaformSelectBox = ({initialState, setAllLinks, id}) => {
 
 
     return(
-        <fieldset className={styles.container}>
+        <fieldset className={styles.container} name={'platform'} data-platform={platform}>
             <label className={styles.label}>
                 Platform
             </label>
-            <div className={styles.selectBox} onClick={handlePopup}>
+            <div className={styles.selectBox} onClick={handlePopup} style={{zIndex}}>
                 <img src={platformIcon} className={styles.platformIcon}/>
                 {platform}
                 <img src={'/icons/icon-chevron-down.svg'} ref={arrowIcon} className={styles.arrow}/>

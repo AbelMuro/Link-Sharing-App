@@ -1,16 +1,18 @@
 import {createContext, useState} from 'react';
 import '../styles/global/styles.css';
+import { onAuthStateChanged } from 'firebase/auth';
+import {auth} from '../firebase/Configuration';
 
 export const Context = createContext();
 
 export default function MyApp({Component, pageProps}) {
-    const [userId, setUserId] = useState('');
+    const [uid, setUid] = useState('');
     const [openLoginMessage, setOpenLoginMessage] = useState(false);
     const [link, setLink] = useState('links');
 
     const value = {
-        userId,
-        setUserId,
+        uid,
+        setUid,
         openLoginMessage,
         setOpenLoginMessage,
         link,
