@@ -1,9 +1,9 @@
-import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
+import {useState, useRef, useEffect, useImperativeHandle} from 'react';
 import styles from '../../styles/account/LinkInput.module.css';
 
 
-const LinkInput = forwardRef(({initialLink}, ref) => {
-    const [url, setUrl] = useState(initialLink);
+const LinkInput = ({initialState, setAllLinks, id}) => {
+    const [url, setUrl] = useState(initialState);
     const inputRef = useRef();
     const emptyMessageRef = useRef();
     const invalidUrlMessageRef = useRef();
@@ -30,28 +30,41 @@ const LinkInput = forwardRef(({initialLink}, ref) => {
         if(isEmpty) {
             emptyMessageRef.current.style.display = 'block';
             inputRef.current.style.border = '1px solid #FF3939';
+            inputRef.current.style.color = '#FF3939'
         }
         else if(!isValidLink) {
+            e.target.setCustomValidity(' ');
             invalidUrlMessageRef.current.style.display = 'block';
             inputRef.current.style.border = '1px solid #FF3939';
+            inputRef.current.style.color = '#FF3939'
         }
+        else{                                               //we update the link in the parent's state
+            setAllLinks((links) => {
+                return links.map((link) => {
+                    if(link.id === id)
+                        return {...link, url};
+                    else
+                        return link;
+                })
+            })            
+        }
+
     }
     const handleInvalid = (e) => {
-        e.target.setCustomValidity(' ')
-        emptyMessageRef.current.style.display = 'block';
-        inputRef.current.style.border = '1px solid #FF3939';
-        invalidUrlMessageRef.current.style.display = 'block';
-    }
+        e.target.setCustomValidity(' ');
+        const isEmpty = e.target.validity.valueMissing;
 
-    useImperativeHandle(ref, () => ({
-        get state(){
-            return url;
+        if(isEmpty){
+            emptyMessageRef.current.style.display = 'block';
+            inputRef.current.style.border = '1px solid #FF3939';
+            inputRef.current.style.color = '#FF3939'           
         }
-    }))
+    }
 
     useEffect(() => {
         emptyMessageRef.current.style.display = '';
         inputRef.current.style.border = '';
+        inputRef.current.style.color = ''
         invalidUrlMessageRef.current.style.display = '';
     }, [url])
 
@@ -81,6 +94,6 @@ const LinkInput = forwardRef(({initialLink}, ref) => {
             </div>
         </fieldset>
     )
-})
+}
 
 export default LinkInput;

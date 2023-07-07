@@ -1,8 +1,8 @@
-import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import styles from '../../styles/account/PlatformSelectBox.module.css';
 
-const PlaformSelectBox = forwardRef(({initialPlatform}, ref) =>  {
-    const [platform, setPlatform] = useState(initialPlatform ? initialPlatform : 'Github');
+const PlaformSelectBox = ({initialState, setAllLinks, id}) => {
+    const [platform, setPlatform] = useState(initialState ? initialState : 'Github');
     const [platformIcon, setPlatformIcon] = useState('/icons/icon-github.svg');
     const [open, setOpen] = useState(false);
     const arrowIcon = useRef();
@@ -10,7 +10,6 @@ const PlaformSelectBox = forwardRef(({initialPlatform}, ref) =>  {
 
     const handleOption = (e) => {
         if(!e.target.matches('.' + styles.popup_option)) return;
-
         const dataOption = e.target.getAttribute('data-option');
         setPlatform(dataOption);
         setPlatformIcon(`/icons/icon-${dataOption.toLowerCase().replace(' ', '')}.svg`)
@@ -20,11 +19,16 @@ const PlaformSelectBox = forwardRef(({initialPlatform}, ref) =>  {
         setOpen(!open);
     }
 
-    useImperativeHandle(ref, () => ({
-        get state(){
-            return platform;
-        }
-    }))
+    useEffect(() => {
+        setAllLinks((links) => {
+            return links.map((link) => {
+                if(link.id === id)
+                    return {...link, platform};
+                else
+                    return link;
+            })
+        })
+    }, [platform])
 
     useEffect(() => {
         if(open){
@@ -44,6 +48,7 @@ const PlaformSelectBox = forwardRef(({initialPlatform}, ref) =>  {
             }, 200)
         }
     }, [open])
+
 
     return(
         <fieldset className={styles.container}>
@@ -75,9 +80,8 @@ const PlaformSelectBox = forwardRef(({initialPlatform}, ref) =>  {
                     </div>
                 </div>
             </div>
-
         </fieldset>
     )
-})
+}
 
 export default PlaformSelectBox;

@@ -23,7 +23,8 @@
 }
 
 .container:nth-of-type(2){
-    padding: 40px;
+    padding: 40px 40px 94px 40px;
+    overflow: hidden;
 }
 
 .title{
@@ -64,6 +65,15 @@
 .addLinkButton:hover{
     background-color: #EFEBFF;
 }
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 500px;
+    overflow-y: auto;
+}
+
 
 .link_container{
     padding: 20px;
@@ -111,12 +121,12 @@
     justify-content: flex-end;
     padding: 0px 40px;
     position: absolute;
+    z-index: var(--closest);
     bottom: 0px;
     left: 0;
     right: 0;
     margin: auto;
 }
-
 
 .submit{
     width: 91px;
