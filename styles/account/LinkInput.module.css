@@ -70,3 +70,10 @@
     margin: auto;
     right: 16px;
 }
+
+@media(max-width: 700px){
+    .errorMessage{
+        top: initial;
+        bottom: -20px;
+    }
+}

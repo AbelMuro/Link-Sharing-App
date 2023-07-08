@@ -1,21 +1,19 @@
-import {memo, useMemo} from 'react';
+import {memo, useMemo, useContext} from 'react';
+import {Context} from '../../pages/_app';
 import PhoneLinkBox from './PhoneLinkBox';
 import Image from 'next/image';
 import styles from '../../styles/account/PhoneMockup.module.css';
 
-const PhoneMockup = ({links}) => {
+const PhoneMockup = () => {
+    const {usersLinks} = useContext(Context);
 
     const linkBoxes = useMemo(() => {
-        if(!links) return;
-
-        return links.map((link, i) => {
+        return usersLinks.map((link, i) => {
             return(
-                <PhoneLinkBox link={link} links={links} index={i} key={link.id} />
+                <PhoneLinkBox link={link} index={i} key={link.id}/>
             )
         })
-    }, [links])
-
-
+    }, [usersLinks])
 
     return(
         <section className={styles.container}>

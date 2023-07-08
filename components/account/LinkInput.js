@@ -1,12 +1,16 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, useContext} from 'react';
+import {Context} from '../../pages/_app';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import styles from '../../styles/account/LinkInput.module.css';
 
 
-const LinkInput = ({initialState}) => {
+const LinkInput = ({initialState, linkId}) => {
+    const {dispatch} = useContext(Context)
     const [url, setUrl] = useState(initialState);
     const inputRef = useRef();
     const emptyMessageRef = useRef();
     const invalidUrlMessageRef = useRef();
+    const mobile = useMediaQuery('(max-width: 700px)');
 
     const isValidUrl = (url) => {
         try{
@@ -31,16 +35,17 @@ const LinkInput = ({initialState}) => {
             emptyMessageRef.current.style.display = 'block';
             inputRef.current.style.border = '1px solid #FF3939';
             inputRef.current.style.color = '#FF3939'
+            inputRef.current.style.paddingRight = mobile ? '' : '100px';
         }
         else if(!isValidLink) {
             e.target.setCustomValidity(' ');
             invalidUrlMessageRef.current.style.display = 'block';
             inputRef.current.style.border = '1px solid #FF3939';
-            inputRef.current.style.color = '#FF3939'
+            inputRef.current.style.color = '#FF3939';
+            inputRef.current.style.paddingRight = mobile ? '' : '140px' ;
         }
-        else{                                               //we update the link in the parent's state
-         
-        }
+
+        dispatch({type: 'update link', linkId, link: url})
 
     }
     const handleInvalid = (e) => {
@@ -57,7 +62,8 @@ const LinkInput = ({initialState}) => {
     useEffect(() => {
         emptyMessageRef.current.style.display = '';
         inputRef.current.style.border = '';
-        inputRef.current.style.color = ''
+        inputRef.current.style.color = '';
+        inputRef.current.style.paddingRight = '';
         invalidUrlMessageRef.current.style.display = '';
     }, [url])
 

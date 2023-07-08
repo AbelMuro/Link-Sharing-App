@@ -141,3 +141,7 @@
     mask-image: url('../../public/icons/icon-hashnode.svg');
     -webkit-mask-image: url('../../public/icons/icon-hashnode.svg');
 }
+
+@media(max-width: 700px){
+    
+}

@@ -35,6 +35,7 @@
     font-weight: 600;
     line-height: 150%;
     cursor: pointer;
+    justify-content: space-between;
 }
 
 
@@ -46,7 +47,6 @@
     width: 122px;
     height: 46px;
     display: flex;
-    justify-content: space-between;
 }
 
 .link span {
@@ -91,8 +91,52 @@
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .previewButton:hover{
     background-color: #EFEBFF;
+}
+
+.eyeIcon{
+    width: 20px;
+    object-fit: contain;
+
+}
+
+@media(max-width: 900px){
+    .logo{
+        width: 108px;
+    }
+
+    .links {
+        gap: 0px;
+    }
+}
+
+@media(max-width: 700px){
+
+    .container{
+        height: 74px;
+    }
+    .logo{
+        width: 32px;
+    }
+
+    .link{
+        justify-content: center;
+    }
+
+    .link:nth-of-type(1), .link:nth-of-type(2){
+        width: 74px;
+        height: 42px;
+    }
+
+    .previewButton{
+        width: 52px;
+        height: 42px;
+        justify-content: center;
+    }
 }

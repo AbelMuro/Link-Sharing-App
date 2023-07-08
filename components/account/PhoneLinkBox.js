@@ -1,12 +1,10 @@
 import { useDrop, useDrag } from "react-dnd"
 import {useRef, useContext} from 'react';
 import {Context} from '../../pages/_app';
-import { updateDoc, doc } from "firebase/firestore";
-import {db} from '../../firebase/Configuration';
 import styles from '../../styles/account/PhoneLinkBox.module.css';
 
-export default function PhoneLinkBox({link, links, index}) {
-    const {uid} = useContext(Context);
+export default function PhoneLinkBox({link, index}) {
+    const {dispatch} = useContext(Context);
     const linkRef = useRef();    
     const platform = link.platform.toLowerCase().replace(' ','');
     const platformTitle = link.platform;
@@ -18,31 +16,9 @@ export default function PhoneLinkBox({link, links, index}) {
         }),
         hover: (hoverLink) => {        
             if(hoverLink.id === link.id) return;
-       
             const hoverLinkIndex = hoverLink.index;
             const dropLinkIndex = index;
-            const linksCopy = [...links];
-            let temp = linksCopy[hoverLinkIndex].order;
-            linksCopy[hoverLinkIndex].order = linksCopy[dropLinkIndex].order;
-            linksCopy[dropLinkIndex].order = temp;
-
-            linksCopy.map((link) => {
-                const linkId = link.id
-                const newPlatform = link.platform;
-                const newLink = link.link;
-                const newOrder = link.order;
-    
-                async function updateDocs(){
-                    const linkDoc = doc(db, `${uid}/${linkId}`);
-                    await updateDoc(linkDoc, {
-                        id: linkId,
-                        platform: newPlatform,
-                        link: newLink,
-                        order: newOrder
-                    })
-                }
-                updateDocs();
-            })
+            dispatch({type: 're-order links', indices: {hoverLink: hoverLinkIndex, dropLink: dropLinkIndex}});
             hoverLink.index = index;
         },
     })
@@ -52,7 +28,10 @@ export default function PhoneLinkBox({link, links, index}) {
         item: () => {                          
             return {id: link.id, index: index};
         },
-        isDragging: (monitor) => {              
+        isDragging: (monitor) => {
+            if(monitor.getItem().itemCameFromOtherComponent)            // the <CustomizeLink/> component is also re-arranging the same list of links, 
+                return false                                            // and will trigger this function in THIS component when the items get re-arranged
+            
             return link.id === monitor.getItem().id;   
         },
         collect: (monitor) => ({

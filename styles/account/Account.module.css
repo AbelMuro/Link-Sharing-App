@@ -7,3 +7,30 @@
     row-gap: 24px;
     column-gap: 24px;
 }
+
+@media(max-width: 1330px){
+    .container{
+        width: 90%;
+        grid-template-columns: 40% 60%;
+    }
+}
+
+@media(max-width: 1000px){
+    .container{
+        grid-template-columns: 353.88px 55%;
+    }
+}
+
+@media(max-width: 900px){
+    .container{
+        grid-template-columns: 100%;
+        column-gap: 0px;
+    }
+}
+
+@media(max-width: 700px){
+    .container{
+        padding-top: 0px;
+        width: 100%;
+    }
+}

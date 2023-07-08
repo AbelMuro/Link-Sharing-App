@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import {Context} from '../pages/_app';
 import NavBar from '../components/account/NavBar';
-import CustomizedLinks from '../components/account/CustomizeLinks';
+import LinksTab from '../components/account/LinksTab';
 import styles from '../styles/account/Account.module.css'
 import { onAuthStateChanged } from 'firebase/auth';
 import {auth} from '../firebase/Configuration';
@@ -18,7 +18,7 @@ export default function Account() {
         <main className={styles.container}>
             <NavBar/>
             {link === 'links' ? 
-                uid && <CustomizedLinks/>
+                uid && <LinksTab/>
                 : <></>}
         </main>
     )

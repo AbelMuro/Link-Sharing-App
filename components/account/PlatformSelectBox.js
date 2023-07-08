@@ -1,7 +1,9 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, useContext} from 'react';
+import {Context} from '../../pages/_app';
 import styles from '../../styles/account/PlatformSelectBox.module.css';
 
-const PlaformSelectBox = ({initialState, zIndex}) => {
+const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
+    const {dispatch} = useContext(Context);
     const [platform, setPlatform] = useState(initialState ? initialState : 'Github');
     const [platformIcon, setPlatformIcon] = useState('/icons/icon-github.svg');
     const [open, setOpen] = useState(false);
@@ -37,6 +39,10 @@ const PlaformSelectBox = ({initialState, zIndex}) => {
             }, 200)
         }
     }, [open])
+
+    useEffect(() => {
+        dispatch({type: 'update link', platform, linkId: linkId})
+    }, [platform])  
 
 
     return(
