@@ -2,27 +2,7 @@
     width: 100%;
     border-radius: 12px;
     background-color: white;  
-    position: relative;
-}
-
-.container:nth-of-type(1){
-    height: 834px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.phone_container{
-    position: relative;
-}
-
-.phone_mockup{
-    width: 307px;
-    height: auto;
-    object-fit: contain;
-}
-
-.container:nth-of-type(2){
+    position: relative;    
     min-height: 834px;
     padding: 40px 0px 0px 0px;
 }
@@ -68,13 +48,19 @@
     background-color: #EFEBFF;
 }
 
-.form{
+.addLinkButton:disabled{
+    background-color: #cccccc;
+    color: #666666;
+    border: 1px solid transparent;
+    cursor: not-allowed;
+}
+
+.allLinks{
     display: flex;
     flex-direction: column;
     gap: 24px;
     min-height: 500px;
     padding: 0px 40px 24px 40px;
-
 }
 
 

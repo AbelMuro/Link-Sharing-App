@@ -1,0 +1,30 @@
+.container{
+    height: 834px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.phone_container{
+    position: relative;
+}
+
+.phone_mockup{
+    width: 307px;
+    height: auto;
+    object-fit: contain;
+}
+
+.linkBoxes {
+    width: 237px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 278px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

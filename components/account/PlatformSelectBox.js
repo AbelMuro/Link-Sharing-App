@@ -52,8 +52,8 @@ const PlaformSelectBox = ({initialState, zIndex}) => {
                     <div className={styles.popup_option} data-option='Github'>
                         <span className={styles.popup_icon}></span>Github
                     </div>
-                    <div className={styles.popup_option} data-option='Youtube'>
-                        <span className={styles.popup_icon}></span>Youtube
+                    <div className={styles.popup_option} data-option='YouTube'>
+                        <span className={styles.popup_icon}></span>YouTube
                     </div>
                     <div className={styles.popup_option} data-option='LinkedIn'>
                         <span className={styles.popup_icon}></span>LinkedIn

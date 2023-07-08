@@ -1,25 +1,30 @@
-import {useMemo, useContext} from 'react';
+import {useMemo, useContext, useEffect, useRef} from 'react';
 import {Context} from '../../pages/_app';
 import {v4 as uuid} from 'uuid'
 import PlaformSelectBox from './PlatformSelectBox';
 import LinkInput from './LinkInput';
-import Image from 'next/image';
+import PhoneMockup from './PhoneMockup';
 import styles from '../../styles/account/CustomizeLinks.module.css';
 import {db} from '../../firebase/Configuration';
-import {collection, doc, setDoc, deleteDoc, updateDoc} from 'firebase/firestore';    
-import {useCollectionData} from 'react-firebase-hooks/firestore';      
+import {collection, doc, setDoc, deleteDoc, updateDoc, query, orderBy} from 'firebase/firestore';    
+import {useCollectionData} from 'react-firebase-hooks/firestore';    
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"  
 
 
 export default function CustomizedLinks(){
     const {uid} = useContext(Context);
     const collectionRef = collection(db, uid);
-    const [links, loading, error] = useCollectionData(collectionRef);
+    const q = query(collectionRef, orderBy('order'));
+    const [links, loading, error] = useCollectionData(q);
+    const addLinkButton = useRef();
 
     const addLink = async () => {
         const newLink = {
             id: uuid(),
             platform: 'Github',
             link: '',
+            order: links.length + 1
         }
         const newDoc = doc(db, uid, newLink.id);
         await setDoc(newDoc, newLink);
@@ -50,7 +55,6 @@ export default function CustomizedLinks(){
             }
             updateDocs();
         })
-
     }
 
     const showLinks = useMemo(() => {
@@ -72,34 +76,34 @@ export default function CustomizedLinks(){
         })
     }, [links, loading])
 
+    useEffect(() => {
+        if(loading) return;
+        addLinkButton.current.disabled = links.length >= 5 ? true : false;
+    }, [loading, links])
+
 
     return(
         <>
-            <section className={styles.container}>
-                <div className={styles.phone_container}>
-                    <Image src={'/images/illustration-phone-mockup.svg'}
-                        width='0' height='0'
-                        alt='phone mockup'
-                        className={styles.phone_mockup}/>
-                </div>
-            </section>
-            <section className={styles.container}>
+            <DndProvider backend={HTML5Backend}>  
+                <PhoneMockup links={links}/>
+            </DndProvider>
+            <form className={styles.container} onSubmit={handleSubmit}>
                 <h1 className={styles.title}>
                     Customize your links
                 </h1>
                 <p className={styles.desc}>
                     Add/edit/remove links below and then share all your profiles with the world
                 </p>
-                <button className={styles.addLinkButton} onClick={addLink}> 
+                <button type='button' className={styles.addLinkButton} onClick={addLink} ref={addLinkButton}> 
                     + Add new link
                 </button>
-                <form className={styles.form} onSubmit={handleSubmit}>
+                <fieldset className={styles.allLinks}>
                     {showLinks}
-                </form>                    
+                </fieldset>                    
                 <div className={styles.submit_container}>
                     <input type='submit' value='Save' className={styles.submit}/> 
                 </div>
-            </section>
+            </form>
         </>
     )
 }

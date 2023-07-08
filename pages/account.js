@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext} from 'react';
 import {Context} from '../pages/_app';
 import NavBar from '../components/account/NavBar';
 import CustomizedLinks from '../components/account/CustomizeLinks';
