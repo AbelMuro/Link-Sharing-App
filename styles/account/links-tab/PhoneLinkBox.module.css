@@ -30,11 +30,49 @@
 }
 
 .linkBox.facebook{
-    background-color: rgb(0, 0, 255)
+    background-color: #2442AC;
 }
 
 .linkBox.frontendmentor{
-    background-color: rgb(0, 161, 0);
+    background-color: #FFFFFF;
+    color: #333;
+    border: 1px solid #D9D9D9;
+}
+
+.linkBox.twitter{
+    background-color: #43B7E9;
+}
+
+.linkBox.twitch{
+    background-color: #EE3FC8;
+}
+
+.linkBox.devto{
+    background-color: #333333
+}
+
+.linkBox.codewars{
+    background-color: #8A1A50;
+}
+
+.linkBox.freecodecamp{
+    background-color: #302267;
+}
+
+.linkBox.gitlab{
+    background-color: #EB4925;
+}
+
+.linkBox.hashnode{
+    background-color: #0330D1;
+}
+
+.linkBox.stackoverflow{
+    background-color: #EC7100;
+}
+
+.linkBox.codepen{
+    background-color: rgb(70, 70, 70);
 }
 
 

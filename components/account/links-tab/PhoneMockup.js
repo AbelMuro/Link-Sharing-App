@@ -1,8 +1,8 @@
 import {memo, useMemo, useContext} from 'react';
-import {Context} from '../../pages/_app';
+import {Context} from '../../../pages/_app';
 import PhoneLinkBox from './PhoneLinkBox';
 import Image from 'next/image';
-import styles from '../../styles/account/PhoneMockup.module.css';
+import styles from '../../../styles/account/links-tab/PhoneMockup.module.css'
 
 const PhoneMockup = () => {
     const {usersLinks} = useContext(Context);

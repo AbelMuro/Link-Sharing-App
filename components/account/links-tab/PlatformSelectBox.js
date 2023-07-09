@@ -1,20 +1,22 @@
 import {useState, useRef, useEffect, useContext} from 'react';
-import {Context} from '../../pages/_app';
-import styles from '../../styles/account/PlatformSelectBox.module.css';
+import {Context} from '../../../pages/_app';
+import styles from '../../../styles/account/links-tab/PlatformSelectBox.module.css'
 
 const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
+    let initialPlatform = initialState.toLowerCase().replace(' ', '').replace('.', '');
     const {dispatch} = useContext(Context);
     const [platform, setPlatform] = useState(initialState ? initialState : 'Github');
-    const [platformIcon, setPlatformIcon] = useState('/icons/icon-github.svg');
+    const [platformIcon, setPlatformIcon] = useState(initialState ? `/icons/select-icons/icon-${initialPlatform}.svg` : '/icons/select-icons/icon-github.svg');
     const [open, setOpen] = useState(false);
     const arrowIcon = useRef();
     const popupRef = useRef();
 
     const handleOption = (e) => {
         if(!e.target.matches('.' + styles.popup_option)) return;
-        const dataOption = e.target.getAttribute('data-option');
-        setPlatform(dataOption);
-        setPlatformIcon(`/icons/icon-${dataOption.toLowerCase().replace(' ', '')}.svg`)
+        let dataOption = e.target.getAttribute('data-option');
+        setPlatform(dataOption);        
+        dataOption = dataOption.toLowerCase().replace(' ', '').replace('.', '');
+        setPlatformIcon(`/icons/select-icons/icon-${dataOption}.svg`)
     }
 
     const handlePopup = () => {
@@ -72,6 +74,30 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
                     </div>
                     <div className={styles.popup_option} data-option='Gitlab'>
                         <span className={styles.popup_icon}></span>Gitlab
+                    </div>
+                    <div className={styles.popup_option} data-option='Twitter'>
+                        <span className={styles.popup_icon}></span>Twitter
+                    </div>
+                    <div className={styles.popup_option} data-option='Twitch'>
+                        <span className={styles.popup_icon}></span>Twitch
+                    </div>
+                    <div className={styles.popup_option} data-option='Dev.to'>
+                        <span className={styles.popup_icon}></span>Dev.to
+                    </div>
+                    <div className={styles.popup_option} data-option='Codewars'>
+                        <span className={styles.popup_icon}></span>Codewars
+                    </div>
+                    <div className={styles.popup_option} data-option='Codepen'>
+                        <span className={styles.popup_icon}></span>Codepen
+                    </div>
+                    <div className={styles.popup_option} data-option='freeCodeCamp'>
+                        <span className={styles.popup_icon}></span>freeCodeCamp
+                    </div>
+                    <div className={styles.popup_option} data-option='Hashnode'>
+                        <span className={styles.popup_icon}></span>Hashnode
+                    </div>
+                    <div className={styles.popup_option} data-option='Stack Overflow'>
+                        <span className={styles.popup_icon}></span>Stack Overflow
                     </div>
                 </div>
             </div>

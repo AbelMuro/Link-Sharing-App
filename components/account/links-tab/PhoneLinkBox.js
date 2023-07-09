@@ -1,12 +1,13 @@
 import { useDrop, useDrag } from "react-dnd"
-import {useRef, useContext} from 'react';
-import {Context} from '../../pages/_app';
-import styles from '../../styles/account/PhoneLinkBox.module.css';
+import {useContext, useEffect, useRef} from 'react';
+import {Context} from '../../../pages/_app';
+import styles from '../../../styles/account/links-tab/PhoneLinkBox.module.css'
 
 export default function PhoneLinkBox({link, index}) {
     const {dispatch} = useContext(Context);
     const linkRef = useRef();    
-    const platform = link.platform.toLowerCase().replace(' ','');
+    const arrowRef = useRef();
+    const platform = link.platform.toLowerCase().replace(' ','').replace('.', '');      //formating this string because some file names have empty spaces and capitalized letters
     const platformTitle = link.platform;
 
     const [{handlerId}, drop] = useDrop({      
@@ -39,6 +40,11 @@ export default function PhoneLinkBox({link, index}) {
         })
     })
 
+    //front end mentor has a white background so i need to display a darker arrow to make it more visible
+    useEffect(() => {
+        arrowRef.current.src = platformTitle === 'Frontend Mentor' ? '/icons/icon-arrow-right-dark.svg' : '/icons/icon-arrow-right.svg';
+    }, [link])
+
     drag(drop(linkRef));   
 
     return(                
@@ -46,9 +52,9 @@ export default function PhoneLinkBox({link, index}) {
             ref={linkRef}
             data-handler-id={handlerId}
             style={isDragging ? {opacity: 0} : {opacity: 1}}>
-                <img className={styles.linkIcon} src={`/icons/icon-${platform}-link-box.svg`}/>
+                <img className={styles.linkIcon} src={`/icons/icon-link-boxes/icon-${platform}-link-box.svg`}/>
                 {platformTitle}
-                <img className={styles.linkArrow} src={'/icons/icon-arrow-right.svg'}/>
+                <img className={styles.linkArrow} ref={arrowRef}/>
         </div>
     )
 }

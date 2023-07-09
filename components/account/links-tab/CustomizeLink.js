@@ -1,10 +1,10 @@
 import {useRef, useContext} from 'react';
-import {Context} from '../../pages/_app';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import {Context} from '../../../pages/_app';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 import { useDrop, useDrag } from "react-dnd"
 import PlaformSelectBox from './PlatformSelectBox';
 import LinkInput from './LinkInput';
-import styles from '../../styles/account/CustomizeLink.module.css'
+import styles from '../../../styles/account/links-tab/CustomizeLink.module.css'
 
 export default function CustomizeLink({link, index}) {
     const linkRef = useRef();

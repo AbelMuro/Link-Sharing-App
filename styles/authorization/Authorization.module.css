@@ -83,18 +83,16 @@
 }
 
 @media(max-width: 540px){
-    .logo{
-        width: 135px;
-    }
-
     .container{
         align-items: flex-start;
         gap: 64px;
         width: 100%;
-        padding: 0px 32px;
-        top: 32px;
+        padding: 32px 32px;
+        background-color: white;
+        top: 0px;
         left: 0px;
         transform: none;
+        height: 100vh;
     }
 
     .login, .createAccount{

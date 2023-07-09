@@ -25,9 +25,3 @@ body{
     min-height: 100vh;
     border: 0.1px solid transparent;                /* to prevent margin collapse*/
 }
-
-@media(max-width: 540px) {
-    body{
-        background-color: White;
-    }
-}

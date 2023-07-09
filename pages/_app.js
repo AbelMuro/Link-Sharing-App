@@ -5,11 +5,10 @@ import '../styles/global/styles.css';
 export const Context = createContext();
 
 export default function MyApp({Component, pageProps}) {
-    const [uid, setUid] = useState('');
-    const [openLoginMessage, setOpenLoginMessage] = useState(false);
-    const [link, setLink] = useState('links');
-    const [usersLinks, dispatch] = useReducer(linksReducer, []);
-
+    const [uid, setUid] = useState('');                                 //the user's account id
+    const [usersLinks, dispatch] = useReducer(linksReducer, []);        //usersLinks contains ALL of the user's links
+    const [openLoginMessage, setOpenLoginMessage] = useState(false);    //a dialog box that appears that will give the user a message
+    const [openSaveChangesMessage, setOpenSaveChangesMessage] = useState(false); 
 
     const value = {
         uid,
@@ -18,8 +17,8 @@ export default function MyApp({Component, pageProps}) {
         dispatch,
         openLoginMessage,
         setOpenLoginMessage,
-        link,
-        setLink
+        openSaveChangesMessage, 
+        setOpenSaveChangesMessage
     }
 
     return(

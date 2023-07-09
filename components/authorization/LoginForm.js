@@ -1,5 +1,4 @@
-import {useRef, useState, useContext} from 'react';
-import {Context} from '../../pages/_app';
+import {useRef, useState} from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import styles from '../../styles/authorization/LoginForm.module.css';
 import Input from './Input';
@@ -9,7 +8,6 @@ import {useRouter} from 'next/navigation'
 
 
 export default function LoginForm() {
-    const {setUserId} = useContext(Context);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const email = useRef();

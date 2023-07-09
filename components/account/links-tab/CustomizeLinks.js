@@ -1,13 +1,13 @@
 import {useMemo, useContext, useEffect, useRef} from 'react';
-import {Context} from '../../pages/_app';
+import {Context} from '../../../pages/_app';
 import {v4 as uuid} from 'uuid'
 import CustomizeLink from './CustomizeLink';
-import styles from '../../styles/account/CustomizeLinks.module.css';
-import {db} from '../../firebase/Configuration';
+import styles from '../../../styles/account/links-tab/CustomizeLinks.module.css'
+import {db} from '../../../firebase/Configuration';
 import {doc, updateDoc} from 'firebase/firestore';  
 
 export default function CustomizeLinks() {
-    const {uid, usersLinks, dispatch} = useContext(Context);
+    const {uid, usersLinks, dispatch, setOpenSaveChangesMessage} = useContext(Context);
     const addLinkButton = useRef();
 
     const addLink = async () => {
@@ -20,23 +20,11 @@ export default function CustomizeLinks() {
         dispatch({type: 'add link', link: newLink}); 
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();       
-        usersLinks.forEach((link) => {
-            const linkId = link.id
-            const newPlatform = link.platform
-            const newLink = link.link;
-
-            async function updateDocs(){
-                const linkDoc = doc(db, `${uid}/${linkId}`);
-                await updateDoc(linkDoc, {
-                    id: linkId,
-                    platform: newPlatform,
-                    link: newLink,
-                })
-            }
-            updateDocs();
-        })
+        const linkDoc = doc(db, `${uid}/userLinks`);
+        await updateDoc(linkDoc, {links: usersLinks});
+        setOpenSaveChangesMessage(true);
     }
 
     const showLinks = useMemo(() => {
@@ -54,7 +42,7 @@ export default function CustomizeLinks() {
 
 
 
-    return(            
+    return(      
         <form className={styles.container} onSubmit={handleSubmit}>
             <h1 className={styles.title}>
                 Customize your links
@@ -66,11 +54,23 @@ export default function CustomizeLinks() {
                 <button type='button' className={styles.addLinkButton} onClick={addLink} ref={addLinkButton}> 
                     + Add new link
                 </button>                
-                {showLinks}
+                {showLinks.length ? showLinks : 
+                    <div className={styles.emptyMessage}>
+                        <img src={'/images/illustration-empty.svg'} className={styles.emptyIcon}/>
+                        <h1 className={styles.emptyMessageTitle}>
+                            Let's get you started
+                        </h1>
+                        <p className={styles.emptyMessageDesc}>
+                            Use the “Add new link” button to get started. 
+                            Once you have more than one link, you can reorder and edit them. 
+                            We’re here to help you share your profiles with everyone!
+                        </p>
+                    </div>
+                }
             </fieldset>                    
-            <div className={styles.submit_container}>
+            <section className={styles.submit_container}>
                 <input type='submit' value='Save' className={styles.submit}/> 
-            </div>
-    </form>
+            </section>  
+        </form>                
     )
 }

@@ -1,0 +1,41 @@
+.changesSavedDialog{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    bottom: -56px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 56px;
+    background-color:#333333;
+    color: #FAFAFA;
+    border-radius: 12px;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    padding: 16px 0px;
+    align-items: center;
+    gap: 8px;
+    padding: 0px 24px;
+}
+
+.changesSavedIcon{
+    width: 20px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media(max-width: 500px){
+    .changesSavedDialog{
+        font-size: 0.70rem;
+        width: 90%;
+        height: 56px;
+        bottom: -90px;
+    }
+
+    .changesSavedIcon{
+        width: 16px;
+    }
+}

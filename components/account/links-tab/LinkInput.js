@@ -1,7 +1,7 @@
 import {useState, useRef, useEffect, useContext} from 'react';
-import {Context} from '../../pages/_app';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import styles from '../../styles/account/LinkInput.module.css';
+import {Context} from '../../../pages/_app';
+import useMediaQuery from '../../../hooks/useMediaQuery';
+import styles from '../../../styles/account/links-tab/LinkInput.module.css'
 
 
 const LinkInput = ({initialState, linkId}) => {
