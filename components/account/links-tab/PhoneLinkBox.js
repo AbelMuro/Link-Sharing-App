@@ -1,7 +1,7 @@
 import { useDrop, useDrag } from "react-dnd"
 import {useContext, useEffect, useRef} from 'react';
 import {Context} from '../../../pages/_app';
-import styles from '../../../styles/account/links-tab/PhoneLinkBox.module.css'
+import styles from '../../../styles/account/PhoneLinkBox.module.css'
 
 export default function PhoneLinkBox({link, index}) {
     const {dispatch} = useContext(Context);

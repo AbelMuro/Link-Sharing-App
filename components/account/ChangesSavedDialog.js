@@ -10,6 +10,7 @@ export default function ChangedSavedDialog(){
         if(openSaveChangesMessage){
             dialogRef.current.style.display = 'flex';
             setTimeout(() => {
+                if(!dialogRef.current) return;
                 dialogRef.current.style.bottom = '40px'
             }, 10)
             setTimeout(() => {
@@ -19,6 +20,7 @@ export default function ChangedSavedDialog(){
         else{
             dialogRef.current.style.bottom = '';
             setTimeout(() => {
+                if(!dialogRef.current) return;
                 dialogRef.current.style.display = '';
             }, 2000)
         }

@@ -23,7 +23,7 @@ export default function Account() {
                 <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab}/>
                 {currentTab === 'links' ? 
                     uid && <LinksTab/>
-                    : <ProfileTab/>}
+                    : uid && <ProfileTab/>}
             </main> 
             <ChangesSavedDialog/>          
         </>

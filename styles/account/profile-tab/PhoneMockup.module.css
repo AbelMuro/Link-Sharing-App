@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    height: 834px;
+    border-radius: 12px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.phoneContainer{
+    position: relative;
+}
+
+.phoneMockup{
+    width: 307px;
+    object-fit: contain;
+}
+
+.phoneLinksContainer{
+    background-color: white;
+    width: 237px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    bottom: 57px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
