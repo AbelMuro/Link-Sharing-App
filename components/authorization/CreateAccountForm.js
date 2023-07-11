@@ -2,8 +2,9 @@ import {useState, useRef, useContext} from 'react'
 import { Context } from '../../pages/_app';
 import Input from './Input';
 import styles from '../../styles/authorization/CreateAccountForm.module.css'
-import {auth} from '../../firebase/Configuration';
+import {auth, db} from '../../firebase/Configuration';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {doc, setDoc} from 'firebase/firestore';
 import { CircularProgress } from '@mui/material';
 
 
@@ -39,11 +40,16 @@ export default function CreateAccountForm({setLoginOrCreateAccount}) {
 
         try{
             await createUserWithEmailAndPassword(auth, userEmail, userPassword);
+            const usersLinksDoc = doc(db, `${auth.currentUser.uid}/userLinks`);
+            const profileDetailsDoc = doc(db, `${auth.currentUser.uid}/profileDetails`)
+            await setDoc(usersLinksDoc, {links: []})
+            await setDoc(profileDetailsDoc, {avatar: '', firstName: '', lastName: '' })
             setLoading(false)
             setLoginOrCreateAccount(true);
             setOpenLoginMessage(true)
         }
         catch(error){
+            console.log(error)
             emailAlreadyExists.current.style.display = 'block';
             setLoading(false)            
         }

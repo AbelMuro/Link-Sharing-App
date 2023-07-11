@@ -1,17 +1,14 @@
-import {useContext, useMemo} from 'react';
+import {useMemo} from 'react';
 import PhoneLinkBox from './PhoneLinkBox';
-import {Context} from '../../../pages/_app';
 import styles from '../../../styles/account/profile-tab/PhoneMockup.module.css';
 
-export default function PhoneMockup() {
-    const {usersLinks} = useContext(Context);
+export default function PhoneMockup({userLinks}) {
 
     const showLinks = useMemo(() => {
-        return usersLinks.map((link) => {
-            console.log(link)
+        return userLinks.map((link) => {
             return <PhoneLinkBox platform={link.platform}/>;
         })
-    }, [usersLinks])
+    }, [userLinks])
 
     return(                
         <div className={styles.container}>

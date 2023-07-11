@@ -2,29 +2,29 @@ import PhoneMockup from './PhoneMockup';
 import CustomizeLinks from './CustomizeLinks';
 import {useContext, useEffect} from 'react';
 import {Context} from '../../../pages/_app';
-import {collection,} from 'firebase/firestore';  
+import { doc } from 'firebase/firestore';  
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"  
 import {db} from '../../../firebase/Configuration';
-import {useCollectionData} from 'react-firebase-hooks/firestore'
+import {useDocumentData} from 'react-firebase-hooks/firestore'
 import useMediaQuery from '../../../hooks/useMediaQuery';
 
 export default function LinksTab(){
     const {uid, dispatch} = useContext(Context);
-    const collectionRef = collection(db, uid);
-    const [links, loading] = useCollectionData(collectionRef);
+    const linkDocRef = doc(db, `${uid}/userLinks`);
+    const [userLinks, loadingLinks, error] = useDocumentData(linkDocRef);
     const tablet = useMediaQuery('(max-width: 900px)');
 
     useEffect(() => {
-        if(loading) return;
-        dispatch({type: 'initialize links', links: links[0].links});
-    }, [loading])
+        if(loadingLinks) return;
+        dispatch({type: 'initialize links', links: userLinks.links});
+    }, [loadingLinks])
 
     return(
         <>
             <DndProvider backend={HTML5Backend}> 
-                {loading ? <></> : !tablet && <PhoneMockup/>}
-                {loading ? <></> : <CustomizeLinks/>}
+                {loadingLinks ? <></> : !tablet && <PhoneMockup/>}
+                {loadingLinks ? <></> : <CustomizeLinks/>}
             </DndProvider>     
         </>
 

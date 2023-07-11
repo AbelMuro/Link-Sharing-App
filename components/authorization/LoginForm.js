@@ -27,6 +27,7 @@ export default function LoginForm() {
             router.push('/account');
         }
         catch(error){
+            console.log(error)
             errorMessageRef.current.style.display = 'block';
             setLoading(false);
         }
