@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react'
+import {useContext} from 'react'
 import PhoneMockup from './PhoneMockup';
 import ProfileDetails from './ProfileDetails';
 import {Context} from '../../../pages/_app';

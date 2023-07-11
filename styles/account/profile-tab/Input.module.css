@@ -1,0 +1,40 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input_container{
+    position: relative;
+}
+
+.input{
+    width: 432px;
+    height: 48px;
+    background-color: white;
+    padding: 0px 16px;
+    border-radius:  8px;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 150%;
+    color: #333333;
+    border: 1px solid #D9D9D9;
+}
+
+.errorMessage{
+    display: none;
+    position: absolute;
+    height: 15px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 16px;
+    font-family: var(--font);
+    color: #FF3939;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}

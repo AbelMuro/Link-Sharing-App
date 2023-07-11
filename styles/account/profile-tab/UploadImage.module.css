@@ -32,6 +32,9 @@
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 
