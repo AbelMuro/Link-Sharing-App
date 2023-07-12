@@ -7,6 +7,7 @@ export default function UploadImage() {
 
     const handleImage = (e) => {
         const uploadedImage = e.target.files[0];
+        if(!uploadedImage) return;
         const url = URL.createObjectURL(uploadedImage);
         let imageWidth = 0;
         let imageHeight = 0;
@@ -18,7 +19,7 @@ export default function UploadImage() {
         }
         image.src = url;
 
-        if(imageWidth <= 1024 && imageHeight <= 1024){
+        if(imageWidth > 1024 || imageHeight > 1024){
             messageRef.current.style.color = '#FF3939';      
             return;      
         }

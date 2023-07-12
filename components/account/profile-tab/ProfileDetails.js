@@ -2,7 +2,10 @@ import styles from '../../../styles/account/profile-tab/ProfileDetails.module.cs
 import UploadImage from './UploadImage';
 import BasicDetails from './BasicDetails';
 
+
+//now i need to define my submit handler
 export default function ProfileDetails({profile}) {
+
     return(
         <form className={styles.container}>
             <h1 className={styles.title}>
