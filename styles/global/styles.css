@@ -23,5 +23,4 @@
 body{
     background-color: #FAFAFA;
     min-height: 100vh;
-    border: 0.1px solid transparent;                /* to prevent margin collapse*/
 }

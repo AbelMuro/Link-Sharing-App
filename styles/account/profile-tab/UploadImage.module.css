@@ -70,11 +70,12 @@
     }
 }
 
-@media(max-width: 1000px){
+@media(max-width: 900px){
     .uploadFileContainer{
         width: 193px;
-    }   
+    }
 }
+
 
 @media(max-width: 700px){
     .container{
@@ -84,8 +85,8 @@
         height: auto;
         padding: 20px
     }
-
     .uploadFileContainer{
+        width: 193px;
         margin-bottom: 8px;
     }
 }

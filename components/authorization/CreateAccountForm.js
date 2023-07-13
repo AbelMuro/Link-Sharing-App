@@ -43,7 +43,7 @@ export default function CreateAccountForm({setLoginOrCreateAccount}) {
             const usersLinksDoc = doc(db, `${auth.currentUser.uid}/userLinks`);
             const profileDetailsDoc = doc(db, `${auth.currentUser.uid}/profileDetails`)
             await setDoc(usersLinksDoc, {links: []})
-            await setDoc(profileDetailsDoc, {avatar: '', firstName: '', lastName: '' })
+            await setDoc(profileDetailsDoc, {firstName: '', lastName: '', email: '', avatar: ''})
             setLoading(false)
             setLoginOrCreateAccount(true);
             setOpenLoginMessage(true)

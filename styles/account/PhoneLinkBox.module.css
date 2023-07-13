@@ -7,7 +7,7 @@
     align-items: center;
     padding: 0px 16px;
     gap: 8px;
-    color: var(--white, #FFF);
+    color: #FFF;
     font-family: var(--font);
     font-size: 0.75rem;
     font-style: normal;
@@ -74,7 +74,6 @@
 .linkBox.codepen{
     background-color: rgb(70, 70, 70);
 }
-
 
 .linkIcon{
     width: 16px;

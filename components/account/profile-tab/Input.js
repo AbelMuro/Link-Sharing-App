@@ -1,7 +1,7 @@
 import {useState, useRef, useEffect} from 'react';
 import styles from '../../../styles/account/profile-tab/Input.module.css'
 
-export default function Input({type, label, placeholder,...rest}) {
+export default function Input({type, label, name, placeholder,...rest}) {
     const [text, setText] = useState('');
     const inputRef = useRef();
     const errorMessageRef = useRef();
@@ -53,7 +53,8 @@ export default function Input({type, label, placeholder,...rest}) {
                     className={styles.input} 
                     placeholder={placeholder}
                     id={label}
-                    ref={inputRef}                    
+                    ref={inputRef}  
+                    name={name}                  
                     {...rest} />    
                 <div className={styles.errorMessage} ref={errorMessageRef}>
                     Can't be empty

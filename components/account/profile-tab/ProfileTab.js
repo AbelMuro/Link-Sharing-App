@@ -15,6 +15,7 @@ export default function ProfileTab() {
     const [userLinks, loadingLinks, error] = useDocumentData(linkDocRef);
     const [profileDetails, loadingProfile, err] = useDocumentData(profileDocRef);
 
+    
     return(
         <>
             {loadingLinks ? <></> : !tablet && <PhoneMockup userLinks={userLinks.links}/>}    

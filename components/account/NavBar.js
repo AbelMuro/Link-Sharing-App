@@ -1,14 +1,20 @@
 import {useEffect} from 'react';
+import {useRouter} from 'next/router';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import Image from 'next/image';
 import styles from '../../styles/account/NavBar.module.css';
 
 export default function NavBar({currentTab, setCurrentTab}) {
     const mobile = useMediaQuery('(max-width: 700px)');
+    const router = useRouter();
 
     const handleLink = (e) => {
         const currentLink = e.target.getAttribute('data-link');
         setCurrentTab(currentLink);
+    }
+
+    const handlePreviewLink = () => {
+        router.push('/preview');
     }
 
     useEffect(() => {
@@ -46,7 +52,7 @@ export default function NavBar({currentTab, setCurrentTab}) {
                         {mobile ? '' : 'Profile Details' }
                     </li>
                 </ul>
-                <button className={styles.previewButton}>
+                <button className={styles.previewButton} onClick={handlePreviewLink} >
                     {mobile ? <img src={'/icons/icon-preview-header.svg'} className={styles.eyeIcon}/> : 'Preview'}
                 </button>
             </nav>

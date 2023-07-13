@@ -2,7 +2,7 @@ import {useState, useRef} from 'react';
 import styles from '../../../styles/account/profile-tab/UploadImage.module.css';
 
 export default function UploadImage() {
-    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl, setImageUrl] = useState('');
     const messageRef = useRef();
 
     const handleImage = (e) => {
@@ -42,6 +42,7 @@ export default function UploadImage() {
                     type='file' 
                     onChange={handleImage}
                     accept='image/png, image/jpeg' 
+                    name='profileAvatar'
                     className={styles.uploadFileInput}
                     />
                 <img src={'/icons/icon-upload-image.svg'} className={styles.uploadFileIcon}/>
