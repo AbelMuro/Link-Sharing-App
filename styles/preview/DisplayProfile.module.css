@@ -15,7 +15,7 @@
     background-color: white;
     box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.10);
     width: 349px;
-    height: 569px;
+    min-height: 569px;
     border-radius: 24px;
     padding: 48px 0px;
     display: flex;
@@ -53,6 +53,7 @@
 
 .links{
     width: 237px;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
