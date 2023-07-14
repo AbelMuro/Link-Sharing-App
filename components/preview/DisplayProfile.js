@@ -10,6 +10,8 @@ import linkStyles from '../../styles/account/PhoneLinkBox.module.css';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
 
+//i need to figure out the functionality for the handleShare handler below
+
 export default function Preview() {
     const {uid, setOpenCopiedToClipboardMessage} = useContext(Context);
     const mobile = useMediaQuery('(max-width: 600px)');
@@ -25,7 +27,7 @@ export default function Preview() {
     }
 
     const handleShare = () => {
-        const currentUrl = router.asPath;
+        const currentUrl =  router.pathname;
         navigator.clipboard.writeText(currentUrl);
         setOpenCopiedToClipboardMessage(true);        
     }
@@ -96,4 +98,8 @@ export default function Preview() {
             </header>
         </main>
     )
+}
+
+export function getStaticProps(context){
+
 }
