@@ -18,7 +18,6 @@ export default function Preview() {
     const [allLinks, loadingLinks, err] = useDocumentData(linksRef);
     const [profile, loadingProfile, error] = useDocumentData(profileRef);
 
-
     const showLinks = useMemo(() => {
         if(loadingLinks) return;
         return allLinks.links.map((link, i) => {

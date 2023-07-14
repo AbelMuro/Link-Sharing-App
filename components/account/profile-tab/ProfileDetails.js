@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import {Context} from '../../../pages/_app';
 import {db, storage} from '../../../firebase/Configuration';
 import {ref, uploadBytes} from 'firebase/storage';
@@ -6,14 +6,17 @@ import {doc, setDoc} from 'firebase/firestore';
 import styles from '../../../styles/account/profile-tab/ProfileDetails.module.css';
 import UploadImage from './UploadImage';
 import BasicDetails from './BasicDetails';
+import { CircularProgress } from '@mui/material';
 
 
 export default function ProfileDetails() {
     const {uid, setOpenSaveChangesMessage} = useContext(Context);
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
+            setLoading(true);
             const newAvatarFile = e.target.elements.profileAvatar.files[0];
             if(newAvatarFile){
                 const avatarRef = ref(storage, `/${uid}/usersAvatar`); 
@@ -31,7 +34,9 @@ export default function ProfileDetails() {
                 email: newEmail,
             });        
             setOpenSaveChangesMessage(true);    
+            setLoading(false);
         }catch(error){
+            setLoading(false);
             console.log(error);
         }
 
@@ -48,7 +53,9 @@ export default function ProfileDetails() {
             <UploadImage />
             <BasicDetails />
             <div className={styles.buttonContainer}>
-                <input type='submit' value='Save' className={styles.submitButton}/>
+                <button className={styles.submitButton}>
+                    {loading ? <CircularProgress size='33px'/> : 'Save'}
+                </button>
             </div>
         </form>
     )
