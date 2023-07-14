@@ -15,6 +15,7 @@
     line-height: 150%;
     position: relative;
     cursor: grab;
+    text-decoration-line: none;
 }
 
 .linkBox.github {

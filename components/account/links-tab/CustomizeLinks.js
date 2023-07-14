@@ -1,13 +1,15 @@
-import {useMemo, useContext, useEffect, useRef} from 'react';
+import {useMemo, useState,useContext, useEffect, useRef} from 'react';
 import {Context} from '../../../pages/_app';
 import {v4 as uuid} from 'uuid'
 import CustomizeLink from './CustomizeLink';
 import styles from '../../../styles/account/links-tab/CustomizeLinks.module.css'
 import {db} from '../../../firebase/Configuration';
 import {doc, updateDoc} from 'firebase/firestore';  
+import {CircularProgress} from '@mui/material';
 
 export default function CustomizeLinks() {
     const {uid, usersLinks, dispatch, setOpenSaveChangesMessage} = useContext(Context);
+    const [loading, setLoading] = useState(false);
     const addLinkButton = useRef();
 
     const addLink = async () => {
@@ -22,9 +24,26 @@ export default function CustomizeLinks() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();       
+        let temp = []
+        const hasDuplicate = usersLinks.every((link) => {
+            if(!temp.includes(link.platform)){
+                temp.push(link.platform)
+                return true;
+            }
+            else
+                return false
+            
+        })
+        if(!hasDuplicate){         
+            alert('You cannot have duplicate platform links');
+            return;
+        }
+
+        setLoading(true);
         const linkDoc = doc(db, `${uid}/userLinks`);
         await updateDoc(linkDoc, {links: usersLinks});
         setOpenSaveChangesMessage(true);
+        setLoading(false);
     }
 
     const showLinks = useMemo(() => {
@@ -69,7 +88,9 @@ export default function CustomizeLinks() {
                 }
             </fieldset>                    
             <section className={styles.submit_container}>
-                <input type='submit' value='Save' className={styles.submit}/> 
+                <button className={styles.submit}> 
+                    {loading ? <CircularProgress size='30px'/> : 'Save'}
+                </button>
             </section>  
         </form>                
     )

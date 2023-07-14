@@ -9,6 +9,7 @@ export default function MyApp({Component, pageProps}) {
     const [usersLinks, dispatch] = useReducer(linksReducer, []);        //usersLinks contains ALL of the user's links
     const [openLoginMessage, setOpenLoginMessage] = useState(false);    //a dialog box that appears that will give the user a message
     const [openSaveChangesMessage, setOpenSaveChangesMessage] = useState(false); 
+    const [openCopiedToClipboardMessage, setOpenCopiedToClipboardMessage] = useState(false);
 
     const value = {
         uid,
@@ -18,7 +19,9 @@ export default function MyApp({Component, pageProps}) {
         openLoginMessage,
         setOpenLoginMessage,
         openSaveChangesMessage, 
-        setOpenSaveChangesMessage
+        setOpenSaveChangesMessage,
+        openCopiedToClipboardMessage, 
+        setOpenCopiedToClipboardMessage
     }
 
     return(

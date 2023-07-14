@@ -8,23 +8,25 @@ import { HTML5Backend } from "react-dnd-html5-backend"
 import {db} from '../../../firebase/Configuration';
 import {useDocumentData} from 'react-firebase-hooks/firestore'
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import LoadingLinksScreen from '../../loading/LoadingLinksScreen';
+import LoadingPhoneMockup from '../../loading/LoadingPhoneMockup';
 
 export default function LinksTab(){
     const {uid, dispatch} = useContext(Context);
     const linkDocRef = doc(db, `${uid}/userLinks`);
-    const [userLinks, loadingLinks, error] = useDocumentData(linkDocRef);
+    const [userLinks, loadingUserLinks, error] = useDocumentData(linkDocRef);
     const tablet = useMediaQuery('(max-width: 900px)');
 
     useEffect(() => {
-        if(loadingLinks) return;
+        if(loadingUserLinks) return;
         dispatch({type: 'initialize links', links: userLinks.links});
-    }, [loadingLinks])
+    }, [loadingUserLinks])
 
     return(
         <>
             <DndProvider backend={HTML5Backend}> 
-                {loadingLinks ? <></> : !tablet && <PhoneMockup/>}
-                {loadingLinks ? <></> : <CustomizeLinks/>}
+                {loadingUserLinks ? !tablet && <LoadingPhoneMockup/> : !tablet && <PhoneMockup/>}
+                {loadingUserLinks ? <LoadingLinksScreen/> : <CustomizeLinks/>}
             </DndProvider>     
         </>
 

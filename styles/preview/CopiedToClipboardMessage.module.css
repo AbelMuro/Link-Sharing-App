@@ -1,0 +1,33 @@
+.container{
+    display: none;
+    width: 397px;
+    height: 56px;
+    background-color: #333333;
+    border-radius: 12px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 24px;
+    color: #FAFAFA;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; 
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: -86px;
+}
+
+.linkIcon{
+    width: 20px;
+    object-fit: contain;
+}
+
+@media(max-width: 460px){
+    .container{
+        width: 320px;
+        font-size: 0.75rem;
+    }
+}

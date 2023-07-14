@@ -8,16 +8,11 @@ import UploadImage from './UploadImage';
 import BasicDetails from './BasicDetails';
 
 
-export default function ProfileDetails({profile}) {
+export default function ProfileDetails() {
     const {uid, setOpenSaveChangesMessage} = useContext(Context);
-
-    const handleSave = () => {
-        setOpenSaveChangesMessage(true);
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try{
             const newAvatarFile = e.target.elements.profileAvatar.files[0];
             if(newAvatarFile){
@@ -34,7 +29,8 @@ export default function ProfileDetails({profile}) {
                 firstName: newFirstName,
                 lastName: newLastName,
                 email: newEmail,
-            });            
+            });        
+            setOpenSaveChangesMessage(true);    
         }catch(error){
             console.log(error);
         }
@@ -49,10 +45,10 @@ export default function ProfileDetails({profile}) {
             <p className={styles.desc}>
                 Add your details to create a personal touch to your profile.
             </p>
-            <UploadImage initialState={profile.avatar}/>
+            <UploadImage />
             <BasicDetails />
             <div className={styles.buttonContainer}>
-                <input type='submit' value='Save' className={styles.submitButton} onClick={handleSave}/>
+                <input type='submit' value='Save' className={styles.submitButton}/>
             </div>
         </form>
     )

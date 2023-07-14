@@ -1,5 +1,6 @@
-import {useState, useRef, useEffect, useContext} from 'react';
+import {useState, useRef, useEffect, useContext, useMemo} from 'react';
 import {Context} from '../../../pages/_app';
+import platforms from '../../../data/platforms';
 import styles from '../../../styles/account/links-tab/PlatformSelectBox.module.css'
 
 const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
@@ -22,6 +23,23 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
     const handlePopup = () => {
         setOpen(!open);
     }
+
+
+    const allPlatforms = useMemo(() => {
+        return platforms.map((platform) => {
+            const platformIcon = platform.toLowerCase().replace(' ', '').replace('.', '');
+
+            return(
+                <div className={styles.popup_option} data-option={platform} key={platform}>
+                    <span className={styles.popup_icon} style={
+                        {WebkitMaskImage: `url('/icons/select-icons/icon-${platformIcon}.svg')`,
+                        maskImage: `url('/icons/select-icons/icon-${platformIcon}.svg')`}}>
+                    </span>
+                    {platform}
+                </div>                            
+            )
+        })
+    }, [])
 
     useEffect(() => {
         if(open){
@@ -57,48 +75,7 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
                 {platform}
                 <img src={'/icons/icon-chevron-down.svg'} ref={arrowIcon} className={styles.arrow}/>
                 <div className={styles.popup} onClick={handleOption} ref={popupRef}>
-                    <div className={styles.popup_option} data-option='Github'>
-                        <span className={styles.popup_icon}></span>Github
-                    </div>
-                    <div className={styles.popup_option} data-option='YouTube'>
-                        <span className={styles.popup_icon}></span>YouTube
-                    </div>
-                    <div className={styles.popup_option} data-option='LinkedIn'>
-                        <span className={styles.popup_icon}></span>LinkedIn
-                    </div>
-                    <div className={styles.popup_option} data-option='Facebook'>
-                        <span className={styles.popup_icon}></span>Facebook
-                    </div>
-                    <div className={styles.popup_option} data-option='Frontend Mentor'>
-                        <span className={styles.popup_icon}></span>Frontend Mentor
-                    </div>
-                    <div className={styles.popup_option} data-option='Gitlab'>
-                        <span className={styles.popup_icon}></span>Gitlab
-                    </div>
-                    <div className={styles.popup_option} data-option='Twitter'>
-                        <span className={styles.popup_icon}></span>Twitter
-                    </div>
-                    <div className={styles.popup_option} data-option='Twitch'>
-                        <span className={styles.popup_icon}></span>Twitch
-                    </div>
-                    <div className={styles.popup_option} data-option='Dev.to'>
-                        <span className={styles.popup_icon}></span>Dev.to
-                    </div>
-                    <div className={styles.popup_option} data-option='Codewars'>
-                        <span className={styles.popup_icon}></span>Codewars
-                    </div>
-                    <div className={styles.popup_option} data-option='Codepen'>
-                        <span className={styles.popup_icon}></span>Codepen
-                    </div>
-                    <div className={styles.popup_option} data-option='freeCodeCamp'>
-                        <span className={styles.popup_icon}></span>freeCodeCamp
-                    </div>
-                    <div className={styles.popup_option} data-option='Hashnode'>
-                        <span className={styles.popup_icon}></span>Hashnode
-                    </div>
-                    <div className={styles.popup_option} data-option='Stack Overflow'>
-                        <span className={styles.popup_icon}></span>Stack Overflow
-                    </div>
+                    {allPlatforms}
                 </div>
             </div>
         </fieldset>

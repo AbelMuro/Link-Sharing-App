@@ -1,6 +1,7 @@
 import {useContext} from 'react'
 import PhoneMockup from './PhoneMockup';
 import ProfileDetails from './ProfileDetails';
+import LoadingPhoneMockup from '../../loading/LoadingPhoneMockup';
 import {Context} from '../../../pages/_app';
 import { doc } from 'firebase/firestore';
 import {db} from '../../../firebase/Configuration';
@@ -11,15 +12,12 @@ export default function ProfileTab() {
     const {uid} = useContext(Context);
     const tablet = useMediaQuery('(max-width: 900px)')
     const linkDocRef = doc(db, `${uid}/userLinks`);
-    const profileDocRef = doc(db, `${uid}/profileDetails`);
     const [userLinks, loadingLinks, error] = useDocumentData(linkDocRef);
-    const [profileDetails, loadingProfile, err] = useDocumentData(profileDocRef);
 
-    
     return(
         <>
-            {loadingLinks ? <></> : !tablet && <PhoneMockup userLinks={userLinks.links}/>}    
-            {loadingProfile ? <></> : <ProfileDetails profile={profileDetails}/>}
+            {loadingLinks ? !tablet && <LoadingPhoneMockup/> : !tablet && <PhoneMockup userLinks={userLinks.links}/>}    
+            <ProfileDetails />
         </>
     )
 }
