@@ -1,0 +1,73 @@
+
+.nav{
+    width: 1392px;
+    height: 78px;
+    border-radius: 12px;
+    background-color: white;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 24px;
+}
+
+.editorButton{
+    width: 159px;
+    height: 46px;
+    border-radius: 8px;
+    border: 1px solid #633CFF;
+    background-color: white;
+    color: #633CFF;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+.editorButton:hover {
+    background-color: #633CFF;
+    color: white;
+}   
+
+.shareButton{
+    width: 133px;
+    height: 46px;
+    border-radius: 8px;
+    color: #FFF;
+    background-color: #633CFF;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+
+.shareButton:hover{
+    color: #633CFF;
+    background-color:#FFF; 
+    border: 1px solid #633CFF;
+}
+
+
+@media(max-width: 1440px){
+    .nav{
+        width: 95%;
+    }
+}
+
+@media(max-width: 600px){
+    .nav{
+        width: 100%;
+        border-radius: 0px;
+        height: auto;
+    }
+
+
+    .editorButton{
+        width: 133px;
+    }
+}

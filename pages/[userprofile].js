@@ -1,22 +1,22 @@
-import {useContext, useMemo, useEffect, useRef} from 'react'
-import {Context} from '../../pages/_app';
-import NavBar from './NavBar';
-import {db, storage} from '../../firebase/Configuration'; 
+import {useMemo, useRef, useEffect} from 'react';
+import {db, storage} from '../firebase/Configuration';
 import {doc} from 'firebase/firestore';
+import {ref, getDownloadURL} from 'firebase/storage';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { getDownloadURL, ref } from 'firebase/storage';
-import styles from '../../styles/preview/DisplayProfile.module.css';
-import linkStyles from '../../styles/account/PhoneLinkBox.module.css';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import {useRouter} from 'next/router';
+import styles from '../styles/preview/DisplayProfile.module.css';
+import linkStyles from '../styles/account/PhoneLinkBox.module.css';
+import useMediaQuery from '../hooks/useMediaQuery';
 
-export default function Preview() {
-    const {uid, setOpenCopiedToClipboardMessage} = useContext(Context);
-    const mobile = useMediaQuery('(max-width: 600px)');
+export default function UserProfile() {
+    const router = useRouter();
     const avatarRef = useRef();
-    const linksRef = doc(db, `${uid}/userLinks`);
+    const mobile = useMediaQuery('(max-width: 600px)');
+    const uid = router.query.ID;
+    const linkRef = doc(db, `${uid}/userLinks`);
     const profileRef = doc(db, `${uid}/profileDetails`);
-    const [allLinks, loadingLinks, err] = useDocumentData(linksRef);
-    const [profile, loadingProfile, error] = useDocumentData(profileRef);
+    const [allLinks, loadingLinks, err] = useDocumentData(linkRef);
+    const [profile, loadingProfile, erro] = useDocumentData(profileRef);
 
 
     const showLinks = useMemo(() => {
@@ -60,26 +60,33 @@ export default function Preview() {
     }, [mobile])
 
     return(
-        <main>
-            <header className={styles.header}>
-                {loadingProfile ? <></> : <NavBar userName={`${profile.firstName}${profile.lastName}`} uid={uid} setOpenCopiedToClipboardMessage={setOpenCopiedToClipboardMessage}/>}
-                <section className={styles.profile}>
-                    <img className={styles.avatar} ref={avatarRef}/>
-                    <h1 className={styles.title}>
-                        {loadingProfile ? <></> : profile.firstName + " " + profile.lastName}
-                    </h1>
-                    <h2 className={styles.email}>
-                        {loadingProfile ? <></> : profile.email}
-                    </h2>
-                    <div className={styles.links}>
-                        {showLinks}
-                    </div>
-                </section> 
-            </header>
-        </main>
+        <>
+            <main>
+                <header className={styles.header}>
+                    <section className={styles.profile}>
+                        <img className={styles.avatar} ref={avatarRef}/>
+                        <h1 className={styles.title}>
+                            {loadingProfile ? <></> : profile.firstName + " " + profile.lastName}
+                        </h1>
+                        <h2 className={styles.email}>
+                            {loadingProfile ? <></> : profile.email}
+                        </h2>
+                        <div className={styles.links}>
+                            {showLinks}
+                        </div>
+                    </section> 
+                </header>
+            </main>
+        </>
     )
 }
 
-export function getStaticProps(context){
 
+
+export function getServerSideProps(context) {
+
+    return {
+        props: {
+        }
+    }
 }
