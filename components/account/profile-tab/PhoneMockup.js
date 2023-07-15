@@ -25,6 +25,7 @@ export default function PhoneMockup({userLinks}) {
         const reference = ref(storage, `/${uid}/usersAvatar`);
         getDownloadURL(reference)
             .then((url) => {
+                if(!url) throw new Error('no avatar')
                 avatarRef.current.src = url;
             })    
             .catch((error) => {
@@ -36,7 +37,7 @@ export default function PhoneMockup({userLinks}) {
         <div className={styles.container}>
             <div className={styles.phoneContainer}>
                 <img src={'/images/illustration-phone-mockup.svg'} className={styles.phoneMockup}/>
-                {loadingProfile ? <></> :  profileDetails.avatar && <img className={styles.avatar} ref={avatarRef}/>}
+                {loadingProfile ? <></> : <img className={styles.avatar} ref={avatarRef} style={profileDetails.avatar ? {} : {visibility: 'hidden'}}/>}
                 {loadingProfile ? <></> :  profileDetails.firstName && <h1 className={styles.name}>{profileDetails.firstName}&nbsp;{profileDetails.lastName}</h1>}
                 {loadingProfile ? <></> :  profileDetails.email && <h2 className={styles.email}>{profileDetails.email}</h2>}
                 <div className={styles.phoneLinksContainer}>

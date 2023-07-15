@@ -39,7 +39,6 @@ export default function ProfileDetails() {
             setLoading(false);
             console.log(error);
         }
-
     }
 
     return(
