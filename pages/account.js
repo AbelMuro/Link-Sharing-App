@@ -25,6 +25,7 @@ export default function Account() {
                     uid && <LinksTab/>
                     : uid && <ProfileTab/>}
             </main> 
+        
             <ChangesSavedDialog/>          
         </>
 
