@@ -1,4 +1,4 @@
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import {Context} from '../pages/_app';
 import NavBar from '../components/account/NavBar';
 import LinksTab from '../components/account/links-tab/LinksTab';
@@ -13,8 +13,9 @@ export default function Account() {
     const [currentTab, setCurrentTab] = useState('links');
 
     onAuthStateChanged(auth, (currentUser) => {
-        if(currentUser)
+        if(currentUser){
             setUid(currentUser.uid);
+        }    
     })
 
     return(
@@ -25,7 +26,6 @@ export default function Account() {
                     uid && <LinksTab/>
                     : uid && <ProfileTab/>}
             </main> 
-        
             <ChangesSavedDialog/>          
         </>
 
