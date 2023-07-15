@@ -1,4 +1,5 @@
-import {useEffect} from 'react';
+import {useEffect, useContext} from 'react';
+import {Context} from '../../pages/_app';
 import {useRouter} from 'next/router';
 import {auth} from '../../firebase/Configuration'
 import { signOut } from 'firebase/auth';
@@ -7,6 +8,7 @@ import Image from 'next/image';
 import styles from '../../styles/account/NavBar.module.css';
 
 export default function NavBar({currentTab, setCurrentTab}) {
+    const {setUid} = useContext(Context);
     const mobile = useMediaQuery('(max-width: 700px)');
     const router = useRouter();
 
@@ -17,6 +19,7 @@ export default function NavBar({currentTab, setCurrentTab}) {
 
     const handleGoBackToLogin = async() => {
         await signOut(auth);
+        setUid('');
         router.push('/');
     }
 
