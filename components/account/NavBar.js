@@ -1,5 +1,7 @@
 import {useEffect} from 'react';
 import {useRouter} from 'next/router';
+import {auth} from '../../firebase/Configuration'
+import { signOut } from 'firebase/auth';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import Image from 'next/image';
 import styles from '../../styles/account/NavBar.module.css';
@@ -11,6 +13,11 @@ export default function NavBar({currentTab, setCurrentTab}) {
     const handleLink = (e) => {
         const currentLink = e.target.getAttribute('data-link');
         setCurrentTab(currentLink);
+    }
+
+    const handleGoBackToLogin = async() => {
+        await signOut(auth);
+        router.push('/');
     }
 
     const handlePreviewLink = () => {
@@ -41,6 +48,7 @@ export default function NavBar({currentTab, setCurrentTab}) {
                     width='0' height='0'
                     alt='dev links'
                     className={styles.logo}
+                    onClick={handleGoBackToLogin}
                     />
                 <ul className={styles.links}>
                     <li className={styles.link} onClick={handleLink} data-link='links'>
