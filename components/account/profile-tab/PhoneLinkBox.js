@@ -7,7 +7,7 @@ export default function PhoneLinkBox({platform}) {
        <div className={[styles.linkBox, styles[platformTitle]].join(' ')} style={{cursor: 'initial'}}>
             <img src={`/icons/icon-link-boxes/icon-${platformTitle}-link-box.svg`} className={styles.linkIcon}/>
             {platform}
-            <img src={'/icons/icon-arrow-right.svg'} className={styles.linkArrow}/>
+            <img src={platformTitle === 'frontendmentor' ? '/icons/icon-arrow-right-dark.svg' : '/icons/icon-arrow-right.svg'} className={styles.linkArrow}/>
         </div>
     )
 }

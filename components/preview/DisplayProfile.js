@@ -30,7 +30,7 @@ export default function Preview() {
                     target='_blank'>
                     <img className={linkStyles.linkIcon} src={`/icons/icon-link-boxes/icon-${platformTitle}-link-box.svg`}/>
                     {link.platform}
-                    <img className={linkStyles.linkArrow} src={'/icons/icon-arrow-right.svg'}/>
+                    <img className={linkStyles.linkArrow} src={platformTitle === 'frontendmentor' ? '/icons/icon-arrow-right-dark.svg' : '/icons/icon-arrow-right.svg'}/>
                 </a>
             )
         })
