@@ -42,6 +42,9 @@ export default function CustomizeLink({link, index}) {
             if(!tablet) return false;
             return link.id === monitor.getItem().id;   
         },
+        canDrag: () => {
+            return tablet;
+        },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })

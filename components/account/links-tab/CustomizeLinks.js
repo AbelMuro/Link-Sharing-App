@@ -6,11 +6,19 @@ import styles from '../../../styles/account/links-tab/CustomizeLinks.module.css'
 import {db} from '../../../firebase/Configuration';
 import {doc, updateDoc} from 'firebase/firestore';  
 import {CircularProgress} from '@mui/material';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 
 export default function CustomizeLinks() {
     const {uid, usersLinks, dispatch, setOpenSaveChangesMessage} = useContext(Context);
+    const tablet = useMediaQuery('(max-width: 900px)');
     const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const addLinkButton = useRef();
+
+    const handleClosePopup = () => {
+        setIsOpen(false);
+        localStorage.setItem('linksTooltip', true)
+    }
 
     const addLink = async () => {
         const newLink = {
@@ -60,6 +68,21 @@ export default function CustomizeLinks() {
     }, [usersLinks])
 
 
+    useEffect(() => {
+        if(!tablet) {
+            setIsOpen(false);
+            return;
+        }
+
+        const tooltipRead = localStorage.getItem('linksTooltip');
+        if(tooltipRead)
+            return
+        else if (usersLinks.length > 1)
+            setIsOpen(true);
+        
+
+    }, [usersLinks, tablet])
+
 
     return(      
         <form className={styles.container} onSubmit={handleSubmit}>
@@ -91,7 +114,16 @@ export default function CustomizeLinks() {
                 <button className={styles.submit}> 
                     {loading ? <CircularProgress size='30px'/> : 'Save'}
                 </button>
-            </section>  
+            </section> 
+            {isOpen ? 
+                <div className={styles.tooltip}>
+                    You can Drag and Drop!
+                    <button className={styles.okButton} onClick={handleClosePopup}> 
+                        Got it!
+                    </button>
+                    <div className={styles.arrowDown}></div>
+                </div> : <></>
+            }     
         </form>                
     )
 }

@@ -1,27 +1,17 @@
-import {memo, useMemo, useContext, useState} from 'react';
+import {memo, useMemo, useContext, useState, useEffect} from 'react';
 import {Context} from '../../../pages/_app';
 import PhoneLinkBox from './PhoneLinkBox';
-import {useFloating, offset, shift} from '@floating-ui/react';
 import Image from 'next/image';
 import styles from '../../../styles/account/links-tab/PhoneMockup.module.css'
 
 
-//i will need to create a custom tooltip, instead of relying on floating ui
 const PhoneMockup = () => {
-    const tooltipRead = JSON.parse(localStorage.getItem('phoneMockuptooltip'));
     const {usersLinks} = useContext(Context);
-    const [isOpen, setIsOpen] = useState(tooltipRead === null ? true : false);
- 
-    const {refs, floatingStyles} = useFloating({                        
-         open: isOpen,                                        
-         onOpenChange: setIsOpen,   
-         placement: 'right',                         
-         middleware: [offset(-70), shift({mainAxis: false, padding: 400})]     
-       });
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleClosePopup = () => {
         setIsOpen(false);
-        localStorage.setItem('phoneMockuptooltip', false)
+        localStorage.setItem('phoneMockuptooltip', true)
     }
    
     const linkBoxes = useMemo(() => {
@@ -32,9 +22,19 @@ const PhoneMockup = () => {
         })
     }, [usersLinks])
 
+    useEffect(() => {
+        const tooltipRead = JSON.parse(localStorage.getItem('phoneMockuptooltip'));
+        if(tooltipRead){
+            return;
+        }
+        if(usersLinks.length > 1){
+            setIsOpen(true);
+        }
+    }, [usersLinks])
+
     return(
         <section className={styles.container}>
-            <div className={styles.phone_container} ref={refs.setReference}>
+            <div className={styles.phone_container}>
                 <Image src={'/images/illustration-phone-mockup.svg'}
                     width='0' height='0'
                     alt='phone mockup'
@@ -43,16 +43,17 @@ const PhoneMockup = () => {
                 <div className={styles.linkBoxes}>
                     {linkBoxes}
                 </div>
-            </div>
             {isOpen ? 
-                <div ref={refs.setFloating} style={floatingStyles} className={styles.tooltip}>
+                <div className={styles.tooltip}>
                     You can Drag and Drop!
                     <button className={styles.okButton} onClick={handleClosePopup}> 
-                        OK
+                        Got it!
                     </button>
                     <div className={styles.arrowDown}></div>
                 </div> : <></>
-            }
+            }                
+            </div>
+
         </section>
     )
 }

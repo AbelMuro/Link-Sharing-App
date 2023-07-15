@@ -45,7 +45,9 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    position: relative;
+    position: absolute;
+    top: 170px;
+    right: -25px;
 }
 
 .okButton{
