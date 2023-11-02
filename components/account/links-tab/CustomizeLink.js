@@ -51,6 +51,7 @@ export default function CustomizeLink({link, index}) {
             key={link.id} 
             name='linkContainer' 
             id={link.id} 
+            draggableId={link.id}
             ref={linkRef} 
             data-handler-id={handlerId}
             style={isDragging ? {opacity: 0} : {opacity: 1}}>

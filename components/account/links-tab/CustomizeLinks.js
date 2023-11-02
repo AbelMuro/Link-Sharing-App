@@ -98,10 +98,7 @@ export default function CustomizeLinks() {
                 <button type='button' className={styles.addLinkButton} onClick={addLink} ref={addLinkButton}> 
                     + Add new link
                 </button>                
-                {showLinks.length ? 
-                    <DndProvider backend={HTML5Backend}>
-                        {showLinks}
-                    </DndProvider> : 
+                {showLinks.length ? showLinks : 
                     <div className={styles.emptyMessage}>
                         <img src={'/images/illustration-empty.svg'} className={styles.emptyIcon}/>
                         <h1 className={styles.emptyMessageTitle}>
