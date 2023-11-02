@@ -1,6 +1,5 @@
 import {useRef, useContext} from 'react';
 import {Context} from '../../../pages/_app';
-import useMediaQuery from '../../../hooks/useMediaQuery';
 import { useDrop, useDrag } from "react-dnd"
 import PlaformSelectBox from './PlatformSelectBox';
 import LinkInput from './LinkInput';
@@ -9,7 +8,6 @@ import styles from '../../../styles/account/links-tab/CustomizeLink.module.css'
 export default function CustomizeLink({link, index}) {
     const linkRef = useRef();
     const {dispatch} = useContext(Context);
-    const tablet = useMediaQuery('(max-width: 900px)');
 
     const removeLink = async (e) => {
         const linkID = e.target.id;
@@ -23,7 +21,6 @@ export default function CustomizeLink({link, index}) {
         }),
         hover: (hoverLink) => {        
             if(hoverLink.id === link.id) return;
-            if(!tablet) return false;
        
             const hoverLinkIndex = hoverLink.index;
             const dropLinkIndex = index;
@@ -39,11 +36,7 @@ export default function CustomizeLink({link, index}) {
             return {id: link.id, index: index, itemCameFromOtherComponent: 'CustomizeLinkComponent'};            
         },
         isDragging: (monitor) => {     
-            if(!tablet) return false;
             return link.id === monitor.getItem().id;   
-        },
-        canDrag: () => {
-            return tablet;
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
