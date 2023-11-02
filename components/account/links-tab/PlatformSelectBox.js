@@ -44,15 +44,13 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
     useEffect(() => {
         if(open){
             popupRef.current.style.display = 'block';
-            arrowIcon.current.style.transform = 'rotate(180deg)';
             setTimeout(() => {
                 if(!popupRef.current) return;
                 popupRef.current.style.transform = 'scale(1)';
             }, 10)
         }
         else{
-            popupRef.current.style.transform = '';      
-            arrowIcon.current.style.transform = '';      
+            popupRef.current.style.transform = '';           
             setTimeout(() => {
                 if(!popupRef.current) return;
                 popupRef.current.style.display = 'block';
