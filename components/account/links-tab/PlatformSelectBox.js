@@ -46,13 +46,15 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
             popupRef.current.style.display = 'block';
             setTimeout(() => {
                 if(!popupRef.current) return;
-            }, 10)
+
+            }, 10);
         }
-        else{       
+        else{  
+            popupRef.current.style.display = '';           
             setTimeout(() => {
                 if(!popupRef.current) return;
-                popupRef.current.style.display = 'block';
-            }, 200)
+
+            }, 200);
         }
     }, [open])
 
@@ -66,6 +68,7 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
             <label className={styles.label}>
                 Platform
             </label>
+
             <div className={styles.selectBox} onClick={handlePopup} style={{zIndex}}>
                 <img src={platformIcon} className={styles.platformIcon}/>
                 {platform}
