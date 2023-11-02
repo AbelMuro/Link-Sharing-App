@@ -17,8 +17,10 @@ export default function PhoneLinkBox({link, index}) {
         }),
         hover: (hoverLink) => {        
             if(hoverLink.id === link.id) return;
+
             const hoverLinkIndex = hoverLink.index;
             const dropLinkIndex = index;
+            
             dispatch({type: 're-order links', indices: {hoverLink: hoverLinkIndex, dropLink: dropLinkIndex}});
             hoverLink.index = index;
         },

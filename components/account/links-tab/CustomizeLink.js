@@ -51,7 +51,6 @@ export default function CustomizeLink({link, index}) {
             key={link.id} 
             name='linkContainer' 
             id={link.id} 
-            draggableId={link.id}
             ref={linkRef} 
             data-handler-id={handlerId}
             style={isDragging ? {opacity: 0} : {opacity: 1}}>
@@ -60,9 +59,7 @@ export default function CustomizeLink({link, index}) {
                 </h1>
                 <button type='button' className={styles.link_remove} onClick={removeLink} id={link.id}>
                     Remove
-                </button>
-                <PlaformSelectBox initialState={link.platform} zIndex={1000-index} linkId={link.id}/>
-                <LinkInput initialState={link.link} linkId={link.id}/>                       
+                </button>                   
         </fieldset>      
     )
 }
