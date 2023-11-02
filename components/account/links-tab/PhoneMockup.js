@@ -43,7 +43,7 @@ const PhoneMockup = () => {
                     priority
                     className={styles.phone_mockup}/>
                 <div className={styles.linkBoxes}>
-                    <DndProvider backend={HTML5Backend }>
+                    <DndProvider backend={HTML5Backend}>
                         {linkBoxes}
                     </DndProvider>
                 </div>
