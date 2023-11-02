@@ -46,11 +46,9 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
             popupRef.current.style.display = 'block';
             setTimeout(() => {
                 if(!popupRef.current) return;
-                popupRef.current.style.transform = 'scale(1)';
             }, 10)
         }
-        else{
-            popupRef.current.style.transform = '';           
+        else{       
             setTimeout(() => {
                 if(!popupRef.current) return;
                 popupRef.current.style.display = 'block';
