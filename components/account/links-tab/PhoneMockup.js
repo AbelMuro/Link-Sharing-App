@@ -1,4 +1,6 @@
 import {memo, useMemo, useContext, useState, useEffect} from 'react';
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"  
 import {Context} from '../../../pages/_app';
 import PhoneLinkBox from './PhoneLinkBox';
 import Image from 'next/image';
@@ -41,7 +43,9 @@ const PhoneMockup = () => {
                     priority
                     className={styles.phone_mockup}/>
                 <div className={styles.linkBoxes}>
-                    {linkBoxes}
+                    <DndProvider backend={HTML5Backend }>
+                        {linkBoxes}
+                    </DndProvider>
                 </div>
             {isOpen ? 
                 <div className={styles.tooltip}>

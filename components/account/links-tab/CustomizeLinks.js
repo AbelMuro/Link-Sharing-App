@@ -1,4 +1,6 @@
 import {useMemo, useState,useContext, useEffect, useRef} from 'react';
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"  
 import {Context} from '../../../pages/_app';
 import {v4 as uuid} from 'uuid'
 import CustomizeLink from './CustomizeLink';
@@ -96,7 +98,10 @@ export default function CustomizeLinks() {
                 <button type='button' className={styles.addLinkButton} onClick={addLink} ref={addLinkButton}> 
                     + Add new link
                 </button>                
-                {showLinks.length ? showLinks : 
+                {showLinks.length ? 
+                    <DndProvider backend={HTML5Backend}>
+                        {showLinks}
+                    </DndProvider> : 
                     <div className={styles.emptyMessage}>
                         <img src={'/images/illustration-empty.svg'} className={styles.emptyIcon}/>
                         <h1 className={styles.emptyMessageTitle}>
