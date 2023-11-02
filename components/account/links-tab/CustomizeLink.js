@@ -60,7 +60,7 @@ export default function CustomizeLink({link, index}) {
                 <button type='button' className={styles.link_remove} onClick={removeLink} id={link.id}>
                     Remove
                 </button>
-                <PlaformSelectBox initialState={link.platform} zIndex={1000-index} linkId={link.id}/>                   
+                <LinkInput initialState={link.link} linkId={link.id}/>                       
         </fieldset>      
     )
 }
