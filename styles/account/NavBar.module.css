@@ -24,6 +24,7 @@
 
 .link{
     height: 46px;
+    white-space: nowrap;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
