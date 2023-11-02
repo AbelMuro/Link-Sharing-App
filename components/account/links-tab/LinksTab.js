@@ -5,6 +5,7 @@ import {Context} from '../../../pages/_app';
 import { doc } from 'firebase/firestore';  
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"  
+import { TouchBackend } from 'react-dnd-touch-backend';
 import {db} from '../../../firebase/Configuration';
 import {useDocumentData} from 'react-firebase-hooks/firestore'
 import useMediaQuery from '../../../hooks/useMediaQuery';
@@ -24,7 +25,7 @@ export default function LinksTab(){
 
     return(
         <>
-            <DndProvider backend={HTML5Backend}> 
+            <DndProvider backend={tablet ? TouchBackend : HTML5Backend}> 
                 {loadingUserLinks ? !tablet && <LoadingPhoneMockup/> : !tablet && <PhoneMockup/>}
                 {loadingUserLinks ? <LoadingLinksScreen/> : <CustomizeLinks/>}
             </DndProvider>     
