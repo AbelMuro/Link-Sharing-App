@@ -60,7 +60,7 @@ export default function NavBar({currentTab, setCurrentTab}) {
                     </li>
                     <li className={styles.link} onClick={handleLink} data-link='profile'>
                         <span></span>
-                        {mobile ? '' : 'Profile Detail' }
+                        {mobile ? '' : 'Profile Details' }
                     </li>
                 </ul>
                 <button className={styles.previewButton} onClick={handlePreviewLink} >
