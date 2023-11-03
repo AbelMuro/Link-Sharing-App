@@ -9,7 +9,6 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
     const [platform, setPlatform] = useState(initialState ? initialState : 'Github');
     const [platformIcon, setPlatformIcon] = useState(initialState ? `/icons/select-icons/icon-${initialPlatform}.svg` : '/icons/select-icons/icon-github.svg');
     const [open, setOpen] = useState(false);
-    const arrowIcon = useRef();
     const popupRef = useRef();
 
     const handleOption = (e) => {
@@ -44,17 +43,9 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
     useEffect(() => {
         if(open){
             popupRef.current.style.display = 'block';
-            setTimeout(() => {
-                if(!popupRef.current) return;
-
-            }, 10);
         }
         else{  
             popupRef.current.style.display = '';           
-            setTimeout(() => {
-                if(!popupRef.current) return;
-
-            }, 200);
         }
     }, [open])
 
@@ -72,7 +63,9 @@ const PlaformSelectBox = ({initialState, zIndex, linkId}) => {
             <div className={styles.selectBox} onClick={handlePopup} style={{zIndex}}>
                 <img src={platformIcon} className={styles.platformIcon}/>
                 {platform}
-                <img src={'/icons/icon-chevron-down.svg'} ref={arrowIcon} className={styles.arrow}/>
+                {open ? 
+                    <img src={'/icons/icon-chevron-up.svg'} className={styles.arrow}/> : 
+                    <img src={'/icons/icon-chevron-down.svg'} className={styles.arrow}/>}
                 <div className={styles.popup} onClick={handleOption} ref={popupRef}>
                     {allPlatforms}
                 </div>
