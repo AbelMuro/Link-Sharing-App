@@ -80,13 +80,3 @@ export default function UserProfile() {
         </>
     )
 }
-
-
-
-export function getServerSideProps(context) {
-
-    return {
-        props: {
-        }
-    }
-}
